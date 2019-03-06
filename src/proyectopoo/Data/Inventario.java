@@ -5,9 +5,8 @@
  */
 package proyectopoo.Data;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  *
@@ -15,14 +14,37 @@ import java.util.HashMap;
  */
 public class Inventario {
     private ArrayList<Producto> productos;
-    private  double valorExistencias;
-    private HashMap<Date,Double> costoPorFecha;
+    private Registro actual;
+    private HashMap<Date,Registro> Registros;
 
-    public Inventario() {
+    public Inventario(ArrayList<Producto> productos, Registro actual, HashMap<Date, Registro> Registros) {
         this.productos = productos;
-        this.valorExistencias = valorExistencias;
+        this.actual = actual;
+        this.Registros = Registros;
     }
-    public void entrada(Date fecha, ArrayList<Producto> unidades, double valor){
-        this.valorExistencias+= valor;
+    public void Venta(int id, int cantidad, double precio){
+        this.productos.get(id).setUnidades(this.productos.get(id).getUnidades()-cantidad);
+        this.actual.venta(id, cantidad, precio);
+        
     }
+    public void Compra(int id, int cantidad, double precio){
+        this.productos.get(id).setUnidades(this.productos.get(id).getUnidades()+cantidad);
+        this.actual.compra(id, cantidad, precio);
+    }
+    
+    public void añadirRegistro(){
+        Date date = new Date((new Date()).getTime()+86400000);
+        
+        this.Registros.put(new Date(), this.actual);
+        HashMap<Integer,Integer[]> nuevo=new HashMap<>();
+        for(Map.Entry<Integer,Operaciones> p:this.actual.getProductos().entrySet()){
+            Integer[] dato={p.getValue().getExistencias(),p.getValue().getPrecioCompra()};
+            nuevo.put(p.getKey(),dato);
+        }
+            
+        
+        this.actual= new Registro(date, this.actual, double valorExistencias);
+    }    
+    
+    
 }

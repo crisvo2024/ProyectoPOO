@@ -10,9 +10,15 @@ package proyectopoo.Data;
  * @author SANTIAGO
  */
 public class Producto {
+    private int id;
     private int unidades;
     private int precioUnidad;
-    private int precioTotal;
+
+    public Producto(int id, int unidades, int precioUnidad) {
+        this.id = id;
+        this.unidades = unidades;
+        this.precioUnidad = precioUnidad;
+    }
 
     public int getUnidades() {
         return unidades;
@@ -30,12 +36,13 @@ public class Producto {
         this.precioUnidad = precioUnidad;
     }
 
-    public int getPrecioTotal() {
-        return precioTotal;
+    public int getId() {
+        return id;
     }
 
-    public void setPrecioTotal(int precioTotal) {
-        this.precioTotal = precioTotal;
+    public void setId(int id) {
+        this.id = id;
     }
+    
     
 }
