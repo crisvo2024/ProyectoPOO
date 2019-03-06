@@ -36,14 +36,15 @@ public class Inventario {
         Date date = new Date((new Date()).getTime()+86400000);
         
         this.Registros.put(new Date(), this.actual);
-        HashMap<Integer,Integer[]> nuevo=new HashMap<>();
+        HashMap<Integer,Double[]> nuevo=new HashMap<>();
         for(Map.Entry<Integer,Operaciones> p:this.actual.getProductos().entrySet()){
-            Integer[] dato={p.getValue().getExistencias(),p.getValue().getPrecioCompra()};
+            double a=p.getValue().getExistencias();
+            Double[] dato={a,p.getValue().getPrecioCompra()};
             nuevo.put(p.getKey(),dato);
         }
             
         
-        this.actual= new Registro(date, this.actual, double valorExistencias);
+        this.actual= new Registro(date, nuevo, this.actual.getValorExistencias());
     }    
     
     

@@ -17,11 +17,12 @@ public class Registro {
     private double valorExistencias;
     private double Ganancias;
 
-    public Registro(Date fecha, HashMap<Integer, Integer[]> datos, double valorExistencias) {
+    public Registro(Date fecha, HashMap<Integer, Double[]> datos, double valorExistencias) {
         this.fecha = fecha;
         this.productos = new HashMap<>();
-        for(Map.Entry<Integer,Integer[]> e:datos.entrySet()){
-            this.productos.put(e.getKey(),new Operaciones(e.getValue()[0],e.getValue()[1]));
+        for(Map.Entry<Integer,Double[]> e:datos.entrySet()){
+            double a=e.getValue()[0];
+            this.productos.put(e.getKey(),new Operaciones((int)a,e.getValue()[1]));
         }
         this.valorExistencias = valorExistencias;
         this.Ganancias = 0;
