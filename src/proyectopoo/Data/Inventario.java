@@ -32,19 +32,20 @@ public class Inventario {
         this.actual.compra(id, cantidad, precio);
     }
     
+    public void AñadirProducto(int id,String nombre,int cantidad,double precioC,double precioV){
+        this.productos.add(new Producto(id, nombre, cantidad, precioV));
+        this.actual.getProductos().put(id,new Operaciones(cantidad, precioC));
+    }
+    
     public void añadirRegistro(){
-        Date date = new Date((new Date()).getTime()+86400000);
-        
-        this.Registros.put(new Date(), this.actual);
+        this.Registros.put(this.actual.getFecha(), this.actual);
         HashMap<Integer,Double[]> nuevo=new HashMap<>();
         for(Map.Entry<Integer,Operaciones> p:this.actual.getProductos().entrySet()){
             double a=p.getValue().getExistencias();
             Double[] dato={a,p.getValue().getPrecioCompra()};
             nuevo.put(p.getKey(),dato);
         }
-            
-        
-        this.actual= new Registro(date, nuevo, this.actual.getValorExistencias());
+        this.actual= new Registro(new Date(), nuevo, this.actual.getValorExistencias());
     }    
     
     

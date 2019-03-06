@@ -10,5 +10,6 @@ package proyectopoo.Data;
  * @author SANTIAGO
  */
 public class Tienda {
+    private Inventario inventario;
     
 }

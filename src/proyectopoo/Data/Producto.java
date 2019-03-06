@@ -11,11 +11,13 @@ package proyectopoo.Data;
  */
 public class Producto {
     private int id;
+    private String nombre;
     private int unidades;
-    private int precioUnidad;
+    private double precioUnidad;
 
-    public Producto(int id, int unidades, int precioUnidad) {
+    public Producto(int id, String nombre, int unidades, double precioUnidad) {
         this.id = id;
+        this.nombre = nombre;
         this.unidades = unidades;
         this.precioUnidad = precioUnidad;
     }
@@ -28,11 +30,11 @@ public class Producto {
         this.unidades = unidades;
     }
 
-    public int getPrecioUnidad() {
+    public double getPrecioUnidad() {
         return precioUnidad;
     }
 
-    public void setPrecioUnidad(int precioUnidad) {
+    public void setPrecioUnidad(double precioUnidad) {
         this.precioUnidad = precioUnidad;
     }
 
@@ -42,6 +44,14 @@ public class Producto {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
     
