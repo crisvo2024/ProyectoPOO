@@ -10,8 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javax.swing.text.TableView;
 
 /**
  *
@@ -21,23 +23,12 @@ public class ProyectoPOO extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
+        Singleton singleton=Singleton.getSingleton();
+        singleton.setStage(primaryStage);
+        TabPane root=new TabPane(new Venta().getRoot());
+        root.setStyle("-fx-background:DimGrey;-fx-font-weight: bold;");
+        Scene value =new Scene(root, 500, 500);
+        primaryStage.setScene(value);
         primaryStage.show();
     }
 
