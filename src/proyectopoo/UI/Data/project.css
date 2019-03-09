@@ -10,7 +10,7 @@ and open the template in the editor.
 .tab-pane{
     -fx-background:DimGrey;
     -fx-font-weight: bold;
-    /*-fx-base:black;*/
+    -fx-base:black;
 }
 .vbox{
     -fx-base:black;

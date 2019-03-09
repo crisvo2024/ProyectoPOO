@@ -83,7 +83,6 @@ public class Venta {
         this.root=new Tab("Venta");
         this.root.setContent(tab);
         this.root.setClosable(false);
-        this.tab.setStyle("-fx-base:black;");
     }
 
     public Tab getRoot() {
