@@ -8,10 +8,14 @@ and open the template in the editor.
     Author     : SANTIAGO
 */
 .tab-pane{
-    -fx-background:DimGrey;
+    -fx-background:#C4C4C4;
     -fx-font-weight: bold;
-    -fx-base:black;
+    -fx-base:#780600;
 }
 .vbox{
     -fx-base:black;
+}
+.label{
+    /*-fx-base:black;*/
+    -fx-text-fill:white;
 }
