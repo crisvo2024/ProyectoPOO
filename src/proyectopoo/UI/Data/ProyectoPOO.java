@@ -26,8 +26,8 @@ public class ProyectoPOO extends Application {
         Singleton singleton=Singleton.getSingleton();
         singleton.setStage(primaryStage);
         TabPane root=new TabPane(new Venta().getRoot());
-        root.setStyle("-fx-background:DimGrey;-fx-font-weight: bold;");
         Scene value =new Scene(root, 500, 500);
+        value.getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
         primaryStage.setScene(value);
         primaryStage.show();
     }
