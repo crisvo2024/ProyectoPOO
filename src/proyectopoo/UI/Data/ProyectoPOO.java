@@ -34,6 +34,7 @@ public class ProyectoPOO extends Application {
         mod.setContent(modificar.getRoot());
         root.getTabs().add(new Venta().getRoot());
         root.getTabs().add(mod);
+        root.getTabs().add(new Compra().getRoot());
         Scene value =new Scene(root, 500, 500);
         value.getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
         primaryStage.setScene(value);

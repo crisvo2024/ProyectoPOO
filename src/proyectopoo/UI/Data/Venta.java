@@ -36,6 +36,7 @@ public class Venta {
     private TextField precio;
     private Button anadir;
     private Button contabilizar;
+    private Label total;
     
 
     public Venta() {
@@ -68,15 +69,21 @@ public class Venta {
         gp.add(new Label("Valor Unitario"), 0, 2);
         this.precio=new TextField();
         gp.add(this.precio,1,2);
-        this.tab.getChildren().add(gp);
+        this.anadir=new Button("A\u00F1adir");
+        gp.add(this.anadir,1,3);
+        GridPane.setHalignment(this.anadir, HPos.RIGHT);
         
         this.contabilizar=new Button("Contabilizar");
+        this.total=new Label("Total: $0.00");
         BorderPane hb=new BorderPane();
-        hb.setPadding(new Insets(10,10,10,170));
-        this.anadir=new Button("A\u00F1adir");
-        hb.setLeft(this.anadir);
-        hb.setRight(this.contabilizar);
+        hb.setLeft(gp);
+        hb.setTop(this.total);
+        BorderPane.setAlignment(this.total, Pos.TOP_RIGHT);
+        BorderPane.setMargin(this.total, new Insets(10, 0, 10, 0));
+        hb.setBottom(this.contabilizar);
+        BorderPane.setAlignment(this.contabilizar, Pos.BOTTOM_RIGHT);
         this.tab.getChildren().add(hb);
+        
         
         
         this.tab.setPadding(new Insets(50));

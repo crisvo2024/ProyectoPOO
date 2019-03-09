@@ -5,6 +5,7 @@
  */
 package proyectopoo.UI.Data;
 
+import java.awt.GridLayout;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -37,6 +38,7 @@ public class Compra {
     private Button anadir;
     private Button contabilizar;
     private Button anadirP;
+    private Label total;
     
 
     public Compra() {
@@ -63,27 +65,36 @@ public class Compra {
         gp.add(new Label("Producto"), 0, 0);
         this.producto=new ComboBox();
         gp.add(this.producto, 1, 0);
-        this.anadirP=new Button("a\u00F1adir nuevo Producto");
-        gp.add(this.anadirP,2,0,2,1);
         gp.add(new Label("Cantidad"),0,1);
         this.cantidad=new TextField();
         gp.add(this.cantidad,1,1);
         gp.add(new Label("Valor Unitario"), 0, 2);
         this.precio=new TextField();
         gp.add(this.precio,1,2);
-        this.tab.getChildren().add(gp);
+        this.anadir=new Button("A\u00F1adir");
+        gp.add(this.anadir,1,3);
+        GridPane.setHalignment(this.anadir, HPos.RIGHT);
         
+        
+        this.total=new Label("Total: $0.00");
+        this.anadirP=new Button("Crear Nuevo Producto");
         this.contabilizar=new Button("Contabilizar");
         BorderPane hb=new BorderPane();
-        hb.setPadding(new Insets(10,10,10,170));
-        this.anadir=new Button("A\u00F1adir");
-        hb.setLeft(this.anadir);
-        hb.setRight(this.contabilizar);
+        hb.setPadding(new Insets(10,0,0,0));
+        hb.setRight(this.anadirP);
+        BorderPane.setMargin(this.anadirP, new Insets(10, 0, 0, 5));
+        BorderPane.setAlignment(this.anadirP, Pos.TOP_RIGHT);
+        hb.setTop(this.total);
+        BorderPane.setAlignment(this.total, Pos.TOP_RIGHT);
+        hb.setLeft(gp);
+        hb.setBottom(this.contabilizar);
+        BorderPane.setAlignment(this.contabilizar, Pos.BOTTOM_RIGHT);
+        
         this.tab.getChildren().add(hb);
         
         
         this.tab.setPadding(new Insets(50));
-        this.root=new Tab("Venta");
+        this.root=new Tab("Compra");
         this.root.setContent(tab);
         this.root.setClosable(false);
     }
