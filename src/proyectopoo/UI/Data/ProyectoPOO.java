@@ -29,13 +29,17 @@ public class ProyectoPOO extends Application {
         
         Modificar modificar = new Modificar();
         Venta venta = new Venta();
+        Consultas consultas = new Consultas();
         TabPane root=new TabPane();
         Tab mod = new Tab("Modificar");
+        Tab con = new Tab("Consultas");
         mod.setContent(modificar.getRoot());
+        con.setContent(consultas.getHead());
         root.getTabs().add(new Venta().getRoot());
-        root.getTabs().add(mod);
         root.getTabs().add(new Compra().getRoot());
-        Scene value =new Scene(root, 500, 500);
+        root.getTabs().add(mod);
+        root.getTabs().add(con);
+        Scene value =new Scene(root, 600, 500);
         value.getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
         primaryStage.setScene(value);
         primaryStage.show();
