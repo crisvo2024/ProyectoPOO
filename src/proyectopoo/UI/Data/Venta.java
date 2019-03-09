@@ -79,7 +79,7 @@ public class Venta {
         this.tab.getChildren().add(hb);
         
         
-        this.tab.setPadding(new Insets(20));
+        this.tab.setPadding(new Insets(50));
         this.root=new Tab("Venta");
         this.root.setContent(tab);
         this.root.setClosable(false);
