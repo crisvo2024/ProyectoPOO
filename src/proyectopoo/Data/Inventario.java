@@ -47,6 +47,18 @@ public class Inventario {
         }
         this.actual= new Registro(new Date(), nuevo, this.actual.getValorExistencias());
     }    
-    
+
+    public ArrayList<Producto> getProductos() {
+        return productos;
+    }
+
+    public HashMap<Date, Registro> getRegistros() {
+        return Registros;
+    }
+
+    public Registro getActual() {
+        return actual;
+    }
+     
     
 }

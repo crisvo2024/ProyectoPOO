@@ -5,11 +5,22 @@
  */
 package proyectopoo.Data;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author SANTIAGO
  */
 public class Tienda {
     private Inventario inventario;
+    private ArrayList<Factura> facturas;
+
+    public Inventario getInventario() {
+        return inventario;
+    }
+
+    public ArrayList<Factura> getFacturas() {
+        return facturas;
+    }
     
 }

@@ -27,8 +27,6 @@ import javafx.scene.layout.VBox;
  */
 public class Venta {
     private Tab root;
-    private VBox tab;
-    private BorderPane head;
     private TableView table;
     private Label numero;
     private ComboBox producto;
@@ -41,21 +39,22 @@ public class Venta {
 
     public Venta() {
         this.numero=new Label("Factura: 1234");        
-        this.head=new BorderPane();
-        this.head.setPadding(new Insets(5));
-        this.head.setLeft(new Label("Cuenta"));
-        this.head.setRight(numero);
-        this.tab=new VBox(head);
+        BorderPane head=new BorderPane();
+        head.setPadding(new Insets(5));
+        head.setLeft(new Label("Cuenta"));
+        head.setRight(numero);
         
-        TableColumn cantidad=new TableColumn("Cantidad");
+        VBox tab=new VBox(head);
+        
+        TableColumn cant=new TableColumn("Cantidad");
         TableColumn produto=new TableColumn("Producto");
         TableColumn precioU=new TableColumn("Precio Unitario");
         TableColumn iva=new TableColumn("IVA");
-        TableColumn total=new TableColumn("Total");
+        TableColumn tot=new TableColumn("Total");
         
         this.table=new TableView();
-        this.table.getColumns().addAll(cantidad,produto,precioU,iva,total);
-        this.tab.getChildren().add(this.table);
+        this.table.getColumns().addAll(cant,produto,precioU,iva,tot);
+        tab.getChildren().add(this.table);
         
         GridPane gp=new GridPane();
         gp.setStyle("-fx-border-radius:18;-fx-background-radius:18;");
@@ -82,11 +81,11 @@ public class Venta {
         BorderPane.setMargin(this.total, new Insets(10, 0, 10, 0));
         hb.setBottom(this.contabilizar);
         BorderPane.setAlignment(this.contabilizar, Pos.BOTTOM_RIGHT);
-        this.tab.getChildren().add(hb);
+        tab.getChildren().add(hb);
         
         
         
-        this.tab.setPadding(new Insets(50));
+        tab.setPadding(new Insets(50));
         this.root=new Tab("Venta");
         this.root.setContent(tab);
         this.root.setClosable(false);
@@ -95,5 +94,38 @@ public class Venta {
     public Tab getRoot() {
         return root;
     }
+
+    public TableView getTable() {
+        return table;
+    }
+
+    public Label getNumero() {
+        return numero;
+    }
+
+    public ComboBox getProducto() {
+        return producto;
+    }
+
+    public TextField getCantidad() {
+        return cantidad;
+    }
+
+    public TextField getPrecio() {
+        return precio;
+    }
+
+    public Button getAnadir() {
+        return anadir;
+    }
+
+    public Button getContabilizar() {
+        return contabilizar;
+    }
+
+    public Label getTotal() {
+        return total;
+    }
+    
     
 }
