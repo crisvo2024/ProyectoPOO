@@ -6,6 +6,7 @@
 package proyectopoo.Data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -15,6 +16,12 @@ public class Tienda {
     private Inventario inventario;
     private ArrayList<Factura> facturas;
 
+    public Tienda() {
+        inventario=new Inventario();
+        inventario.AñadirProducto(0, "Lapiz", 10, 800, 1000,0.19);
+        
+    }
+    
     public Inventario getInventario() {
         return inventario;
     }

@@ -28,6 +28,11 @@ import javafx.scene.layout.VBox;
 public class Venta {
     private Tab root;
     private TableView table;
+    private TableColumn cant;
+    private TableColumn precioU;
+    private TableColumn iva;
+    private TableColumn tot;
+    private TableColumn prod;  
     private Label numero;
     private ComboBox producto;
     private TextField cantidad;
@@ -46,14 +51,14 @@ public class Venta {
         
         VBox tab=new VBox(head);
         
-        TableColumn cant=new TableColumn("Cantidad");
-        TableColumn produto=new TableColumn("Producto");
-        TableColumn precioU=new TableColumn("Precio Unitario");
-        TableColumn iva=new TableColumn("IVA");
-        TableColumn tot=new TableColumn("Total");
+        this.cant=new TableColumn("Cantidad");
+        this.prod=new TableColumn("Producto");
+        this.precioU=new TableColumn("Precio Unitario");
+        this.iva=new TableColumn("IVA");
+        this.tot=new TableColumn("Total");
         
         this.table=new TableView();
-        this.table.getColumns().addAll(cant,produto,precioU,iva,tot);
+        this.table.getColumns().addAll(cant,prod,precioU,iva,tot);
         tab.getChildren().add(this.table);
         
         GridPane gp=new GridPane();
@@ -125,6 +130,26 @@ public class Venta {
 
     public Label getTotal() {
         return total;
+    }
+
+    public TableColumn getCant() {
+        return cant;
+    }
+
+    public TableColumn getPrecioU() {
+        return precioU;
+    }
+
+    public TableColumn getIva() {
+        return iva;
+    }
+
+    public TableColumn getTot() {
+        return tot;
+    }
+
+    public TableColumn getProd() {
+        return prod;
     }
     
     

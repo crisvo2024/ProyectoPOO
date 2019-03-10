@@ -13,15 +13,17 @@ public class Detalle {
     int idP;
     String nombreP;
     double precioV;
-    double cantidad;
+    int cantidad;
     double total;
+    double iva;
 
-    public Detalle(int idP, String nombreP, double precioV, double cantidad, double total) {
+    public Detalle(int idP, String nombreP, double precioV, int cantidad, double iva) {
         this.idP = idP;
         this.nombreP = nombreP;
         this.precioV = precioV;
         this.cantidad = cantidad;
-        this.total = total;
+        this.iva = iva;
+        this.total = precioV*cantidad;
     }
 
     public int getIdP() {
@@ -48,11 +50,11 @@ public class Detalle {
         this.precioV = precioV;
     }
 
-    public double getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(double cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -62,6 +64,14 @@ public class Detalle {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public double getIva() {
+        return iva;
+    }
+
+    public void setIva(double iva) {
+        this.iva = iva;
     }
     
 }

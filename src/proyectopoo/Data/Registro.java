@@ -27,6 +27,14 @@ public class Registro {
         this.valorExistencias = valorExistencias;
         this.Ganancias = 0;
     }
+
+    public Registro() {
+        this.fecha = new Date();
+        this.productos = new HashMap<>();
+        this.valorExistencias=0;
+        this.Ganancias = 0;
+    }
+    
     public void venta(int id,int cantidad,double precio){
         this.valorExistencias-=cantidad*this.productos.get(id).getPrecioCompra();
         this.Ganancias+=cantidad*precio;

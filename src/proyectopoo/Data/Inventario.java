@@ -22,6 +22,13 @@ public class Inventario {
         this.actual = actual;
         this.Registros = Registros;
     }
+
+    public Inventario() {
+        this.productos=new ArrayList<>();
+        this.actual=new Registro();
+        this.Registros=new HashMap<>();
+    }
+    
     public void Venta(int id, int cantidad, double precio){
         this.productos.get(id).setUnidades(this.productos.get(id).getUnidades()-cantidad);
         this.actual.venta(id, cantidad, precio);
@@ -32,8 +39,8 @@ public class Inventario {
         this.actual.compra(id, cantidad, precio);
     }
     
-    public void AñadirProducto(int id,String nombre,int cantidad,double precioC,double precioV){
-        this.productos.add(new Producto(id, nombre, cantidad, precioV));
+    public void AñadirProducto(int id,String nombre,int cantidad,double precioC,double precioV, double iva){
+        this.productos.add(new Producto(id, nombre, cantidad, precioV,iva));
         this.actual.getProductos().put(id,new Operaciones(cantidad, precioC));
     }
     

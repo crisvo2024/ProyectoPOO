@@ -27,13 +27,8 @@ public class ProyectoPOO extends Application {
         Singleton singleton=Singleton.getSingleton();
         singleton.setStage(primaryStage);
         
-        Modificar modificar = new Modificar();
-        Venta venta = new Venta();
-        Consultas consultas = new Consultas();
         TabPane root=new TabPane();
-        
-        
-        root.getTabs().add(new Venta().getRoot());
+        root.getTabs().add(new ControlVenta().getVenta());
         root.getTabs().add(new Compra().getRoot());
         root.getTabs().add(new Modificar().getRoot());
         root.getTabs().add(new Consultas().getRoot());

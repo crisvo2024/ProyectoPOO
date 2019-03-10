@@ -14,12 +14,14 @@ public class Producto {
     private String nombre;
     private int unidades;
     private double precioUnidad;
+    private double iva;
 
-    public Producto(int id, String nombre, int unidades, double precioUnidad) {
+    public Producto(int id, String nombre, int unidades, double precioUnidad, double iva) {
         this.id = id;
         this.nombre = nombre;
         this.unidades = unidades;
         this.precioUnidad = precioUnidad;
+        this.iva = iva;
     }
 
     public int getUnidades() {
@@ -52,6 +54,14 @@ public class Producto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public double getIva() {
+        return iva;
+    }
+
+    public void setIva(double iva) {
+        this.iva = iva;
     }
     
     
