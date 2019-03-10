@@ -31,6 +31,11 @@ public class Compra {
     private VBox tab;
     private BorderPane head;
     private TableView table;
+    private TableColumn cant;
+    private TableColumn precioU;
+    private TableColumn iva;
+    private TableColumn tot;
+    private TableColumn prod;  
     private Label numero;
     private ComboBox producto;
     private TextField cantidad;
@@ -49,14 +54,14 @@ public class Compra {
         this.head.setRight(numero);
         this.tab=new VBox(head);
         
-        TableColumn cantidad=new TableColumn("Cantidad");
-        TableColumn produto=new TableColumn("Producto");
-        TableColumn precioU=new TableColumn("Precio Unitario");
-        TableColumn iva=new TableColumn("IVA");
-        TableColumn total=new TableColumn("Total");
+        this.cant=new TableColumn("Cantidad");
+        this.prod=new TableColumn("Producto");
+        this.precioU=new TableColumn("Precio Unitario");
+        this.iva=new TableColumn("IVA");
+        this.tot=new TableColumn("Total");
         
         this.table=new TableView();
-        this.table.getColumns().addAll(cantidad,produto,precioU,iva,total);
+        this.table.getColumns().addAll(this.cant,this.prod,this.precioU,this.iva,this.tot);
         this.tab.getChildren().add(this.table);
         
         GridPane gp=new GridPane();
@@ -101,6 +106,66 @@ public class Compra {
 
     public Tab getRoot() {
         return root;
+    }
+
+    public BorderPane getHead() {
+        return head;
+    }
+
+    public TableView getTable() {
+        return table;
+    }
+
+    public Label getNumero() {
+        return numero;
+    }
+
+    public ComboBox getProducto() {
+        return producto;
+    }
+
+    public TextField getCantidad() {
+        return cantidad;
+    }
+
+    public TextField getPrecio() {
+        return precio;
+    }
+
+    public Button getAnadir() {
+        return anadir;
+    }
+
+    public Button getContabilizar() {
+        return contabilizar;
+    }
+
+    public Button getAnadirP() {
+        return anadirP;
+    }
+
+    public Label getTotal() {
+        return total;
+    }
+
+    public TableColumn getCant() {
+        return cant;
+    }
+
+    public TableColumn getPrecioU() {
+        return precioU;
+    }
+
+    public TableColumn getIva() {
+        return iva;
+    }
+
+    public TableColumn getTot() {
+        return tot;
+    }
+
+    public TableColumn getProd() {
+        return prod;
     }
     
 }
