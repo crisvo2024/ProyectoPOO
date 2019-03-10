@@ -6,9 +6,11 @@
 package proyectopoo.UI.Data;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.ColumnConstraints;
@@ -38,6 +40,7 @@ public class Consultas {
     private TableColumn iva;
     private TableColumn total;
     private GridPane head;
+    private Tab root;
 
     public Consultas() {
         this.Tipo = new Label("Tipo de factura: ");
@@ -45,7 +48,7 @@ public class Consultas {
         this.Facturas = new Label("Factura:");
         this.Factura = new ComboBox();
         this.NumFactura = new ComboBox();
-        this.selecFac = new Label("#***");
+        this.selecFac = new Label("#********");
         this.Fecha = new Label("Fecha:");
         this.dateFecha = new Label("DD/MM/YYYY");
         this.TotalCompra = new Label("Total Compra: ");
@@ -53,14 +56,15 @@ public class Consultas {
         this.buscar = new Button("Buscar");
         this.table = new TableView();
         this.head = new GridPane();
+        this.head.setAlignment(Pos.CENTER);
         
         buscar.setMinSize(100, 20);
         
-        this.cantidad=new TableColumn("Cantidad");
-        this.producto=new TableColumn("Producto");
-        this.precioU=new TableColumn("Precio Unitario");
-        this.iva=new TableColumn("IVA");
-        this.total=new TableColumn("Precio Total");
+        this.cantidad=new TableColumn("Cantidad:");
+        this.producto=new TableColumn("Producto:");
+        this.precioU=new TableColumn("Precio Unitario:");
+        this.iva=new TableColumn("IVA:");
+        this.total=new TableColumn("Precio Total:");
         this.cantidad.setMinWidth(0);
         
         this.table.getColumns().addAll(cantidad,producto,precioU,iva,total);
@@ -80,14 +84,14 @@ public class Consultas {
         
         this.head.add(Tipo, 0, 0,2,1);
         this.head.add(Numero, 0, 1,2,1);
-        this.head.add(Facturas, 0, 4,2,1);
+        this.head.add(Facturas, 0, 4,1,1);
         this.head.add(table, 0, 5,7,2);
         
         this.head.add(Factura, 2, 0);
         this.head.add(NumFactura, 2, 1);
         
-        this.head.add(Fecha, 2, 4);
-        this.head.add(dateFecha, 3, 4,2,1);
+        this.head.add(Fecha, 3, 4);
+        this.head.add(dateFecha, 4, 4,2,1);
         this.head.add(buscar,4, 0,2,2);
         
         this.head.add(selecFac, 1, 4);
@@ -96,8 +100,20 @@ public class Consultas {
         head.setHgap(10);
         head.setVgap(10);
         this.head.setPadding(new Insets(50));
+        this.root=new Tab("Consultas");
+        this.root.setContent(head);
+        this.root.setClosable(false);
     }
 
+    public Tab getRoot() {
+        return root;
+    }
+
+    public void setRoot(Tab root) {
+        this.root = root;
+    }
+    
+    
     public Label getSelecFac() {
         return selecFac;
     }

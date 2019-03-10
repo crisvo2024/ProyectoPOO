@@ -6,6 +6,7 @@
 package proyectopoo.UI.Data;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -65,6 +66,8 @@ public class Modificar {
         this.newprecio =new TextField();
         this.newexistencias =new TextField();
         this.newIVA =new TextField();
+        this.head.setAlignment(Pos.CENTER);
+        this.head.setAlignment(Pos.TOP_CENTER);
         
         this.head.add(new Label("Seleccione el producto que quiere modificar"), 0, 0,2,1);
         this.head.add(Producto, 0, 2);
@@ -84,12 +87,13 @@ public class Modificar {
         head.setVgap(10);
         this.Guardar = new Button("Guardar");
         this.head.add(Guardar, 2, 6);
+        this.root = new Tab("Modificar");
         this.root.setClosable(false);
         this.root.setContent(head);
     }
 
-    public GridPane getRoot() {
-        return head;
+    public Tab getRoot() {
+        return root;
     } 
 
     public ComboBox getProductos() {
