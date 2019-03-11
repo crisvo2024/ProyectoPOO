@@ -85,7 +85,7 @@ public class ControlVenta {
             a.setContentText("¿Desea guardar asi?");
             ButtonType ok=ButtonType.YES;
             ButtonType cancel=ButtonType.CANCEL;
-            a.getButtonTypes().addAll(ok,cancel);
+            a.getButtonTypes().setAll(ok,cancel);
             Optional<ButtonType> result = a.showAndWait();
             if(result.get()==ok){
                 ArrayList<Detalle>de=new ArrayList<>();
