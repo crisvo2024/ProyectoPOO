@@ -15,14 +15,22 @@ import java.util.Date;
 public class Factura {
     Date fecha;
     double total;
+    int numero;
     ArrayList<Detalle> Entradas;
 
-    public Factura(Date fecha, double total, ArrayList<Detalle> Entradas) {
+    public Factura(Date fecha, int numero, ArrayList<Detalle> Entradas) {
         this.fecha = fecha;
-        this.total = total;
+        this.numero = numero;
         this.Entradas = Entradas;
+        this.total =0;
+        for(Detalle d:Entradas){
+            this.total+=d.getTotal();
+        }
     }
 
+    public int getNumero() {
+        return numero;
+    }
     public Date getFecha() {
         return fecha;
     }
@@ -37,11 +45,6 @@ public class Factura {
 
     public ArrayList<Detalle> getEntradas() {
         return Entradas;
-    }
-
-    public void setEntradas(ArrayList<Detalle> Entradas) {
-        this.Entradas = Entradas;
-    }
-    
+    }   
     
 }

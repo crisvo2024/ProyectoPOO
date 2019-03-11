@@ -7,6 +7,15 @@ and open the template in the editor.
     Created on : 9/03/2019, 01:29:24 PM
     Author     : SANTIAGO
 */
+.dialog-pane{
+    -fx-background:#C4C4C4;
+    -fx-font-weight: bold;
+    -fx-base:#780600;
+}
+.dialog-pane .button{
+    -fx-base:#780600;
+}
+
 .tab-pane{
     -fx-background:#C4C4C4;
     -fx-font-weight: bold;
@@ -19,3 +28,4 @@ and open the template in the editor.
     /*-fx-base:black;*/
     -fx-text-fill:white;
 }
+

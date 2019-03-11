@@ -15,6 +15,7 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
@@ -70,26 +71,30 @@ public class ControlCompra {
         this.compra.getCantidad().setTextFormatter(new TextFormatter<>(new IntegerStringConverter(),0,
             c ->Pattern.matches("\\d*", c.getText())? c : null));
         
+        this.compra.getContabilizar().setOnAction(new contabilizar());
+        
+    }
+    class contabilizar implements EventHandler<ActionEvent>{
+
+        @Override
+        public void handle(ActionEvent event) {
+            
+        }
         
     }
     class anadir implements EventHandler<ActionEvent>{
         @Override
         public void handle(ActionEvent event) {
             Producto p=(Producto)compra.getProducto().getValue();
-            if(p.getUnidades()>=Integer.parseInt(compra.getCantidad().getText())){
-                detalles.add(new Detalle(p.getId(), p.getNombre(), Double.parseDouble(compra.getPrecio().getText()),Integer.parseInt(compra.getCantidad().getText()),p.getIva()));
-                compra.getTable().setItems(detalles);
-                double total=0;
-                for(Detalle d:detalles){
-                    total+=d.getTotal();
-                }
-                compra.getTotal().setText("Total: $"+total);
-            }else{
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setContentText("No hay suficientes unidades del producto");
-                alert.show();
+            detalles.add(new Detalle(p.getId(), p.getNombre(), Double.parseDouble(compra.getPrecio().getText()),Integer.parseInt(compra.getCantidad().getText()),p.getIva()));
+            compra.getTable().setItems(detalles);
+            double total=0;
+            double totaliva=0;
+            for(Detalle d:detalles){
+                total+=d.getTotal();
+                total+=d.getTotal();
             }
+            compra.getTotal().setText("Total Iva: $"+totaliva+"Total: $"+total);            
         }        
     }
     class combo implements ChangeListener<Producto>{

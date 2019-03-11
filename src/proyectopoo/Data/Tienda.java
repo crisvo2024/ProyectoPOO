@@ -6,6 +6,7 @@
 package proyectopoo.Data;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -28,6 +29,10 @@ public class Tienda {
 
     public ArrayList<Factura> getFacturas() {
         return facturas;
+    }
+    public void venta(ArrayList<Detalle> detalles, int factura){
+        this.inventario.Venta(detalles, factura);
+        this.facturas.add(new Factura(new Date(), factura, detalles));
     }
     
 }

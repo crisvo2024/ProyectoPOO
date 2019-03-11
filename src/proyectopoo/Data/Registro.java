@@ -35,14 +35,14 @@ public class Registro {
         this.Ganancias = 0;
     }
     
-    public void venta(int id,int cantidad,double precio){
+    public void venta(int id,int cantidad,double precio, int factura){
         this.valorExistencias-=cantidad*this.productos.get(id).getPrecioCompra();
         this.Ganancias+=cantidad*precio;
-        this.productos.get(id).salida(cantidad, precio);        
+        this.productos.get(id).salida(cantidad, precio,factura);        
     }
-    public void compra(int id,int cantidad,double precio){
+    public void compra(int id,int cantidad,double precio, int factura){
         this.valorExistencias+=cantidad*precio;
-        this.productos.get(id).entrada(cantidad, precio);  
+        this.productos.get(id).entrada(cantidad, precio,factura);  
     }
     public Date getFecha() {
         return fecha;

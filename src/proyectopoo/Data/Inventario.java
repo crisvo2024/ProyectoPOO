@@ -29,14 +29,19 @@ public class Inventario {
         this.Registros=new HashMap<>();
     }
     
-    public void Venta(int id, int cantidad, double precio){
-        this.productos.get(id).setUnidades(this.productos.get(id).getUnidades()-cantidad);
-        this.actual.venta(id, cantidad, precio);
+    public void Venta(ArrayList<Detalle>detalles, int factura){
+        for(Detalle d:detalles){
+            this.productos.get(d.getIdP()).setUnidades(this.productos.get(d.getIdP()).getUnidades()-d.getCantidad());
+            this.actual.venta(d.getIdP(), d.getCantidad(),d.getPrecioV(),factura);
+        }
+        
         
     }
-    public void Compra(int id, int cantidad, double precio){
-        this.productos.get(id).setUnidades(this.productos.get(id).getUnidades()+cantidad);
-        this.actual.compra(id, cantidad, precio);
+    public void Compra(ArrayList<Detalle>detalles, int factura){
+        for(Detalle d:detalles){
+            this.productos.get(d.getIdP()).setUnidades(this.productos.get(d.getIdP()).getUnidades()+d.getCantidad());
+            this.actual.compra(d.getIdP(), d.getCantidad(),d.getPrecioV(),factura);
+        }
     }
     
     public void AñadirProducto(int id,String nombre,int cantidad,double precioC,double precioV, double iva){
