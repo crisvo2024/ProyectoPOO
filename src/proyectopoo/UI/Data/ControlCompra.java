@@ -5,15 +5,19 @@
  */
 package proyectopoo.UI.Data;
 
+import java.util.ArrayList;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListCell;
@@ -42,6 +46,8 @@ public class ControlCompra {
 
     public ControlCompra() {
         this.compra = new Compra();
+        Singleton s=Singleton.getSingleton();
+        this.modelo=s.getModelo();
         this.compra.getAnadir().setOnAction(new anadir());
         this.detalles= FXCollections.observableArrayList();
         this.modelo=new Tienda();
@@ -58,7 +64,6 @@ public class ControlCompra {
             }
         });        
         this.compra.getProducto().setItems(productos);
-        this.compra.getProducto().valueProperty().addListener(new combo());
         this.compra.getProd().setCellValueFactory(new PropertyValueFactory("nombreP"));
         this.compra.getCant().setCellValueFactory(new PropertyValueFactory("cantidad"));
         this.compra.getPrecioU().setCellValueFactory(new PropertyValueFactory("precioV"));
@@ -72,13 +77,37 @@ public class ControlCompra {
             c ->Pattern.matches("\\d*", c.getText())? c : null));
         
         this.compra.getContabilizar().setOnAction(new contabilizar());
+        this.compra.getRoot().setOnSelectionChanged(new selected());
+    }
+    class selected implements EventHandler<Event>{
+
+        @Override
+        public void handle(Event event) {
+            Singleton s=Singleton.getSingleton();
+            modelo=s.getModelo();
+        }
         
     }
     class contabilizar implements EventHandler<ActionEvent>{
 
         @Override
         public void handle(ActionEvent event) {
-            
+            Alert a=new Alert(Alert.AlertType.CONFIRMATION);
+            a.setContentText("¿Desea guardar asi?");
+            ButtonType ok=ButtonType.YES;
+            ButtonType cancel=ButtonType.CANCEL;
+            a.getButtonTypes().setAll(ok,cancel);
+            Optional<ButtonType> result = a.showAndWait();
+            if(result.get()==ok){
+                ArrayList<Detalle>de=new ArrayList<>();
+                de.addAll(detalles);
+                modelo.compra(de, modelo.getFacturasV().size());
+                compra.getProducto().setValue(null);
+                compra.getCantidad().setText("0");
+                compra.getPrecio().setText("0.0");
+                compra.getTotal().setText("Total: 0.0");
+                detalles.clear();
+            }
         }
         
     }
@@ -96,12 +125,6 @@ public class ControlCompra {
             }
             compra.getTotal().setText("Total Iva: $"+totaliva+"Total: $"+total);            
         }        
-    }
-    class combo implements ChangeListener<Producto>{
-        @Override
-        public void changed(ObservableValue<? extends Producto> observable, Producto oldValue, Producto newValue) {
-             compra.getPrecio().setText(String.valueOf(newValue.getPrecioUnidad()));
-        } 
     }
 
     public Tab getCompra(){

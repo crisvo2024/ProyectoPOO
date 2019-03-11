@@ -5,7 +5,6 @@
  */
 package proyectopoo.UI.Data;
 
-import javafx.stage.Stage;
 import proyectopoo.Data.Tienda;
 
 /**

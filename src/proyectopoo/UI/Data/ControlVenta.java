@@ -13,6 +13,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.control.Alert;
@@ -45,6 +46,8 @@ public class ControlVenta {
 
     public ControlVenta() {
         this.venta = new Venta();
+        Singleton s=Singleton.getSingleton();
+        this.modelo=s.getModelo();
         this.venta.getAnadir().setOnAction(new anadir());
         this.detalles= FXCollections.observableArrayList();
         this.modelo=new Tienda();
@@ -75,6 +78,15 @@ public class ControlVenta {
             c ->Pattern.matches("\\d*", c.getText())? c : null));
         
         this.venta.getContabilizar().setOnAction(new contabilizar());
+        this.venta.getRoot().setOnSelectionChanged(new selected());
+    }
+    class selected implements EventHandler<Event>{
+
+        @Override
+        public void handle(Event event) {
+            Singleton s=Singleton.getSingleton();
+            modelo=s.getModelo();
+        }
         
     }
     class contabilizar implements EventHandler<ActionEvent>{
