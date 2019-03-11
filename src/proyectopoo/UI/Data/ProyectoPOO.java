@@ -15,6 +15,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javax.swing.text.TableView;
+import proyectopoo.Data.Tienda;
 
 /**
  *
@@ -25,7 +26,7 @@ public class ProyectoPOO extends Application {
     @Override
     public void start(Stage primaryStage) {
         Singleton singleton=Singleton.getSingleton();
-        singleton.setStage(primaryStage);
+        singleton.setModelo(new Tienda());
         
         TabPane root=new TabPane();
         root.getTabs().add(new ControlVenta().getVenta());

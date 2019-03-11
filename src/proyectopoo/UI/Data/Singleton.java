@@ -6,6 +6,7 @@
 package proyectopoo.UI.Data;
 
 import javafx.stage.Stage;
+import proyectopoo.Data.Tienda;
 
 /**
  *
@@ -13,19 +14,21 @@ import javafx.stage.Stage;
  */
 public class Singleton {
     public static Singleton singleton=null;
-    private Stage stage;
+    private Tienda modelo;
 
     public static Singleton getSingleton(){
         if(singleton==null)singleton=new Singleton();
         return singleton;
     }
 
-    public Stage getStage() {
-        return stage;
+    public Tienda getModelo() {
+        return modelo;
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
+    public void setModelo(Tienda modelo) {
+        this.modelo = modelo;
     }
+
+    
     
 }
