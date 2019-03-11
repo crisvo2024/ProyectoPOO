@@ -109,9 +109,14 @@ public class ControlCompra {
             gp.add(nombre,1,0);
             gp.add(new Label("Precio de venta: "),0,1);
             TextField precio=new TextField();
+            TextFormatter<Double> formatter = new TextFormatter<>(new DoubleStringConverter(),0.0,
+            c ->Pattern.matches("\\d*(\\.\\d*)?", c.getText())? c : null);
+            precio.setTextFormatter(formatter);
             gp.add(precio,1,1);
             gp.add(new Label("Iva: "), 0, 2);
             TextField iva=new TextField();
+            iva.setTextFormatter(new TextFormatter<>(new DoubleStringConverter(),0.0,
+            c ->Pattern.matches("\\d*(\\.\\d*)?", c.getText())? c : null));
             gp.add(iva, 1, 2);
             d.getDialogPane().setContent(gp);
             d.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL,ButtonType.OK);
@@ -129,6 +134,8 @@ public class ControlCompra {
                 double p=Double.parseDouble(result.get()[1]);
                 double i=Double.parseDouble(result.get()[2]);
                 modelo.getInventario().AñadirProducto(modelo.getInventario().getProductos().size(), result.get()[0], p, i);
+                productos.clear();
+                productos.addAll(modelo.getInventario().getProductos());
             }
         }
         
