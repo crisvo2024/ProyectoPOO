@@ -101,6 +101,7 @@ public class ControlCompra {
         @Override
         public void handle(ActionEvent event) {
             Dialog<String[]> d=new Dialog<>();
+            d.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
             d.setTitle("Añadir Producto");
             GridPane gp=new GridPane();
             gp.add(new Label("Nombre: "),0,0);
@@ -177,7 +178,6 @@ public class ControlCompra {
         public void changed(ObservableValue<? extends Producto> observable, Producto oldValue, Producto newValue) {
              if(newValue!=null){
                  System.out.println(modelo.getInventario().getProductos().get(newValue.getId()).getUnidades());
-                 compra.getPrecio().setText(String.valueOf(newValue.getPrecioUnidad()));
              }
         } 
     }
