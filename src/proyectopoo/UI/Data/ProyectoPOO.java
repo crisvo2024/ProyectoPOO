@@ -27,12 +27,11 @@ public class ProyectoPOO extends Application {
     public void start(Stage primaryStage) {
         Singleton singleton=Singleton.getSingleton();
         singleton.setModelo(new Tienda());
-        Tienda t=new Tienda();
         TabPane root=new TabPane();
         root.getTabs().add(new ControlVenta().getVenta());
         root.getTabs().add(new ControlCompra().getCompra());
         root.getTabs().add(new Modificar().getRoot());
-        root.getTabs().add(new Consultas().getRoot());
+        root.getTabs().add(new ControlConsulta().getConsulta());
         root.getTabs().add(new VBalance().getRoot());
         root.getTabs().add(new Kardex().getRoot());
         

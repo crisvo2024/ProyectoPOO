@@ -112,6 +112,14 @@ public class Consultas {
         return root;
     }
 
+    public Label getNumero() {
+        return Numero;
+    }
+
+    public TableColumn getIva() {
+        return iva;
+    }
+    
     public Label getValueCompra() {
         return ValueCompra;
     }
