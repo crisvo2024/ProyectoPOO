@@ -69,10 +69,6 @@ public class Consultas {
         this.total=new TableColumn("Precio Total:");
         this.cantidad.setMinWidth(0);
         
-        ObservableList<Label> tipos = FXCollections.observableArrayList();
-        tipos.add(new Label("Venta"));
-        tipos.add(new Label("Compra"));
-        this.Factura.setItems(tipos);
         
         this.table.getColumns().addAll(cantidad,producto,precioU,iva,total);
         

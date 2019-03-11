@@ -33,6 +33,7 @@ public class ProyectoPOO extends Application {
         root.getTabs().add(new ControlCompra().getCompra());
         root.getTabs().add(new Modificar().getRoot());
         root.getTabs().add(new Consultas().getRoot());
+        root.getTabs().add(new VBalance().getRoot());
         
         Scene value =new Scene(root, 600, 500);
         value.getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
