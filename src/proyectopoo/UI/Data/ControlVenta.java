@@ -5,6 +5,8 @@
  */
 package proyectopoo.UI.Data;
 
+import java.util.ArrayList;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -14,7 +16,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
@@ -70,6 +74,30 @@ public class ControlVenta {
         this.venta.getCantidad().setTextFormatter(new TextFormatter<>(new IntegerStringConverter(),0,
             c ->Pattern.matches("\\d*", c.getText())? c : null));
         
+        this.venta.getContabilizar().setOnAction(new contabilizar());
+        
+    }
+    class contabilizar implements EventHandler<ActionEvent>{
+
+        @Override
+        public void handle(ActionEvent event) {
+            Alert a=new Alert(Alert.AlertType.CONFIRMATION);
+            a.setContentText("¿Desea guardar asi?");
+            ButtonType ok=ButtonType.YES;
+            ButtonType cancel=ButtonType.CANCEL;
+            a.getButtonTypes().addAll(ok,cancel);
+            Optional<ButtonType> result = a.showAndWait();
+            if(result.get()==ok){
+                ArrayList<Detalle>de=new ArrayList<>();
+                de.addAll(detalles);
+                modelo.venta(de, modelo.getFacturas().size());
+                venta.getProducto().setValue(null);
+                venta.getCantidad().setText("0");
+                venta.getPrecio().setText("0.0");
+                venta.getTotal().setText("Total: 0.0");
+                detalles.clear();
+            }
+        }
         
     }
     class anadir implements EventHandler<ActionEvent>{
@@ -80,14 +108,18 @@ public class ControlVenta {
                 detalles.add(new Detalle(p.getId(), p.getNombre(), Double.parseDouble(venta.getPrecio().getText()),Integer.parseInt(venta.getCantidad().getText()),p.getIva()));
                 venta.getTable().setItems(detalles);
                 double total=0;
+                double totaliva=0;
                 for(Detalle d:detalles){
                     total+=d.getTotal();
+                    totaliva+=d.getIva()*d.getTotal();
                 }
-                venta.getTotal().setText("Total: $"+total);
+                venta.getTotal().setText("Total Iva: $"+totaliva+"\nTotal: $"+total);
             }else{
                 Alert alert=new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setContentText("No hay suficientes unidades del producto");
+                DialogPane d=alert.getDialogPane();
+                d.getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
                 alert.show();
             }
         }        
