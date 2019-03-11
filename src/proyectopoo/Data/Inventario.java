@@ -44,9 +44,9 @@ public class Inventario {
         }
     }
     
-    public void AñadirProducto(int id,String nombre,int cantidad,double precioC,double precioV, double iva){
-        this.productos.add(new Producto(id, nombre, cantidad, precioV,iva));
-        this.actual.getProductos().put(id,new Operaciones(cantidad, precioC));
+    public void AñadirProducto(int id,String nombre,double precioV, double iva){
+        this.productos.add(new Producto(id, nombre, 0, precioV,iva));
+        this.actual.getProductos().put(id,new Operaciones(0, 0));
     }
     
     public void añadirRegistro(){

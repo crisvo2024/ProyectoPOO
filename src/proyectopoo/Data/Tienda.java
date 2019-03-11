@@ -22,7 +22,7 @@ public class Tienda {
         inventario=new Inventario();
         facturasC=new ArrayList<>();
         facturasV=new ArrayList<>();
-        inventario.AñadirProducto(0, "Lapiz", 10, 800, 1000,0.19);
+        inventario.AñadirProducto(0, "Lapiz", 1000,0.19);
         
     }
     
@@ -41,6 +41,10 @@ public class Tienda {
     public void compra(ArrayList<Detalle> detalles, int factura){
         this.inventario.Compra(detalles, factura);
         this.facturasC.add(new Factura(new Date(), factura, detalles));
+    }
+
+    public ArrayList<Factura> getFacturasC() {
+        return facturasC;
     }
     
 }

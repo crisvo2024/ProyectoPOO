@@ -50,7 +50,6 @@ public class ControlVenta {
         this.modelo=s.getModelo();
         this.venta.getAnadir().setOnAction(new anadir());
         this.detalles= FXCollections.observableArrayList();
-        this.modelo=new Tienda();
         this.productos=FXCollections.observableArrayList(this.modelo.getInventario().getProductos());
         this.venta.getProducto().setConverter(new StringConverter<Producto>() {
             @Override
@@ -76,7 +75,7 @@ public class ControlVenta {
         this.venta.getPrecio().setTextFormatter(formatter);
         this.venta.getCantidad().setTextFormatter(new TextFormatter<>(new IntegerStringConverter(),0,
             c ->Pattern.matches("\\d*", c.getText())? c : null));
-        
+        this.venta.getNumero().setText("Factura: "+this.modelo.getFacturasV().size());
         this.venta.getContabilizar().setOnAction(new contabilizar());
         this.venta.getRoot().setOnSelectionChanged(new selected());
     }
@@ -84,8 +83,8 @@ public class ControlVenta {
 
         @Override
         public void handle(Event event) {
-            Singleton s=Singleton.getSingleton();
-            modelo=s.getModelo();
+            productos.clear();
+            productos.addAll(modelo.getInventario().getProductos());
         }
         
     }
@@ -95,6 +94,7 @@ public class ControlVenta {
         public void handle(ActionEvent event) {
             Alert a=new Alert(Alert.AlertType.CONFIRMATION);
             a.setContentText("¿Desea guardar asi?");
+            a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
             ButtonType ok=ButtonType.YES;
             ButtonType cancel=ButtonType.CANCEL;
             a.getButtonTypes().setAll(ok,cancel);
@@ -109,6 +109,7 @@ public class ControlVenta {
                 venta.getTotal().setText("Total: 0.0");
                 detalles.clear();
             }
+            venta.getNumero().setText("Factura: "+modelo.getFacturasV().size());
         }
         
     }
@@ -139,7 +140,10 @@ public class ControlVenta {
     class combo implements ChangeListener<Producto>{
         @Override
         public void changed(ObservableValue<? extends Producto> observable, Producto oldValue, Producto newValue) {
-             if(newValue!=null)venta.getPrecio().setText(String.valueOf(newValue.getPrecioUnidad()));
+             if(newValue!=null){
+                 System.out.println(modelo.getInventario().getProductos().get(newValue.getId()).getUnidades());
+                 venta.getPrecio().setText(String.valueOf(newValue.getPrecioUnidad()));
+             }
         } 
     }
 

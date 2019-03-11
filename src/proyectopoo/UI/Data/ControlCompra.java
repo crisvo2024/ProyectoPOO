@@ -5,6 +5,7 @@
  */
 package proyectopoo.UI.Data;
 
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -19,12 +20,17 @@ import javafx.event.EventType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import javafx.util.converter.DoubleStringConverter;
@@ -50,7 +56,6 @@ public class ControlCompra {
         this.modelo=s.getModelo();
         this.compra.getAnadir().setOnAction(new anadir());
         this.detalles= FXCollections.observableArrayList();
-        this.modelo=new Tienda();
         this.productos=FXCollections.observableArrayList(this.modelo.getInventario().getProductos());
         this.compra.getProducto().setConverter(new StringConverter<Producto>() {
             @Override
@@ -64,6 +69,7 @@ public class ControlCompra {
             }
         });        
         this.compra.getProducto().setItems(productos);
+        this.compra.getProducto().valueProperty().addListener(new combo());
         this.compra.getProd().setCellValueFactory(new PropertyValueFactory("nombreP"));
         this.compra.getCant().setCellValueFactory(new PropertyValueFactory("cantidad"));
         this.compra.getPrecioU().setCellValueFactory(new PropertyValueFactory("precioV"));
@@ -75,6 +81,8 @@ public class ControlCompra {
         this.compra.getPrecio().setTextFormatter(formatter);
         this.compra.getCantidad().setTextFormatter(new TextFormatter<>(new IntegerStringConverter(),0,
             c ->Pattern.matches("\\d*", c.getText())? c : null));
+        this.compra.getNumero().setText("Factura: "+this.modelo.getFacturasC().size());
+        this.compra.getAnadirP().setOnAction(new nuevo());
         
         this.compra.getContabilizar().setOnAction(new contabilizar());
         this.compra.getRoot().setOnSelectionChanged(new selected());
@@ -83,8 +91,44 @@ public class ControlCompra {
 
         @Override
         public void handle(Event event) {
-            Singleton s=Singleton.getSingleton();
-            modelo=s.getModelo();
+            productos.clear();
+            productos.addAll(modelo.getInventario().getProductos());
+        }
+        
+    }
+    class nuevo implements EventHandler<ActionEvent>{
+
+        @Override
+        public void handle(ActionEvent event) {
+            Dialog<String[]> d=new Dialog<>();
+            d.setTitle("Añadir Producto");
+            GridPane gp=new GridPane();
+            gp.add(new Label("Nombre: "),0,0);
+            TextField nombre=new TextField();
+            gp.add(nombre,1,0);
+            gp.add(new Label("Precio de venta: "),0,1);
+            TextField precio=new TextField();
+            gp.add(precio,1,1);
+            gp.add(new Label("Iva: "), 0, 2);
+            TextField iva=new TextField();
+            gp.add(iva, 1, 2);
+            d.getDialogPane().setContent(gp);
+            d.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL,ButtonType.OK);
+            d.setResultConverter((param) -> {
+                if(param==ButtonType.OK){
+                    String[] res={nombre.getText(),precio.getText(),iva.getText()};
+                    return res;  
+                }else{
+                    return null;
+                }
+                              
+            });
+            Optional<String[]> result = d.showAndWait();
+            if(result.isPresent()){
+                double p=Double.parseDouble(result.get()[1]);
+                double i=Double.parseDouble(result.get()[2]);
+                modelo.getInventario().AñadirProducto(modelo.getInventario().getProductos().size(), result.get()[0], p, i);
+            }
         }
         
     }
@@ -94,6 +138,7 @@ public class ControlCompra {
         public void handle(ActionEvent event) {
             Alert a=new Alert(Alert.AlertType.CONFIRMATION);
             a.setContentText("¿Desea guardar asi?");
+            a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
             ButtonType ok=ButtonType.YES;
             ButtonType cancel=ButtonType.CANCEL;
             a.getButtonTypes().setAll(ok,cancel);
@@ -108,6 +153,7 @@ public class ControlCompra {
                 compra.getTotal().setText("Total: 0.0");
                 detalles.clear();
             }
+            compra.getNumero().setText("Factura: "+modelo.getFacturasC().size());
         }
         
     }
@@ -125,6 +171,15 @@ public class ControlCompra {
             }
             compra.getTotal().setText("Total Iva: $"+totaliva+"Total: $"+total);            
         }        
+    }
+    class combo implements ChangeListener<Producto>{
+        @Override
+        public void changed(ObservableValue<? extends Producto> observable, Producto oldValue, Producto newValue) {
+             if(newValue!=null){
+                 System.out.println(modelo.getInventario().getProductos().get(newValue.getId()).getUnidades());
+                 compra.getPrecio().setText(String.valueOf(newValue.getPrecioUnidad()));
+             }
+        } 
     }
 
     public Tab getCompra(){
