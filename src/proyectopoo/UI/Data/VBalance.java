@@ -46,7 +46,13 @@ public class VBalance {
     private TableColumn productot;
     private TableColumn cantidadt; 
     private TableColumn ivat;
-    private TableColumn costot;
+    private TableColumn ingresot;
+    private TableColumn fechac;
+    private TableColumn productoc;
+    private TableColumn cantidadc; 
+    private TableColumn ivac;
+    private TableColumn costoc;
+
 
     
     public VBalance() {
@@ -100,15 +106,22 @@ public class VBalance {
         
         head.getChildren().add(Ventas);
         head.getChildren().add(tventas);
-        this.fechat=new TableColumn("Cantidad:");
+        this.fechat=new TableColumn("Fecha:");
         this.productot=new TableColumn("Producto:");
-        this.cantidadt=new TableColumn("Precio Unitario:");
+        this.cantidadt=new TableColumn("Cantidad:");
         this.ivat=new TableColumn("IVA:");
-        this.costot=new TableColumn("Precio Total:");
-        this.tventas.getColumns().addAll(fechat,productot,cantidadt,ivat,costot);
+        this.ingresot=new TableColumn("Costo:");
+        this.tventas.getColumns().addAll(fechat,productot,cantidadt,ivat,ingresot);
         
         head.getChildren().add(Compras);
         head.getChildren().add(tcompras);
+        this.fechac=new TableColumn("Fecha:");
+        this.productoc=new TableColumn("Producto:");
+        this.cantidadc=new TableColumn("Cantidad:");
+        this.ivac=new TableColumn("IVA:");
+        this.costoc=new TableColumn("Costo:");
+        this.tcompras.getColumns().addAll(fechac,productoc,cantidadc,ivac,costoc);
+        
         l6.add(Gtotales,1,0);
         l6.add(gtvalue,2,0);
         l6.add(Ctotales,4,0);
