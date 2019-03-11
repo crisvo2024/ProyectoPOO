@@ -135,6 +135,14 @@ public class Modificar {
     public void setNewIVA(TextField newIVA) {
         this.newIVA = newIVA;
     }
+
+    public Button getGuardar() {
+        return Guardar;
+    }
+
+    public void setGuardar(Button Guardar) {
+        this.Guardar = Guardar;
+    }
     
     
 }

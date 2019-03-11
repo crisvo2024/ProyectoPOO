@@ -15,7 +15,8 @@ import java.util.HashMap;
  */
 public class Tienda {
     private Inventario inventario;
-    private ArrayList<Factura> facturas;
+    private ArrayList<Factura> facturasV;
+    private ArrayList<Factura> facturasC;
 
     public Tienda() {
         inventario=new Inventario();
@@ -27,12 +28,17 @@ public class Tienda {
         return inventario;
     }
 
-    public ArrayList<Factura> getFacturas() {
-        return facturas;
+    public ArrayList<Factura> getFacturasV() {
+        return facturasV;
     }
     public void venta(ArrayList<Detalle> detalles, int factura){
         this.inventario.Venta(detalles, factura);
-        this.facturas.add(new Factura(new Date(), factura, detalles));
+        this.facturasV.add(new Factura(new Date(), factura, detalles));
+    }
+    
+    public void compra(ArrayList<Detalle> detalles, int factura){
+        this.inventario.Compra(detalles, factura);
+        this.facturasC.add(new Factura(new Date(), factura, detalles));
     }
     
 }

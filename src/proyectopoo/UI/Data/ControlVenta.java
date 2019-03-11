@@ -90,7 +90,7 @@ public class ControlVenta {
             if(result.get()==ok){
                 ArrayList<Detalle>de=new ArrayList<>();
                 de.addAll(detalles);
-                modelo.venta(de, modelo.getFacturas().size());
+                modelo.venta(de, modelo.getFacturasV().size());
                 venta.getProducto().setValue(null);
                 venta.getCantidad().setText("0");
                 venta.getPrecio().setText("0.0");

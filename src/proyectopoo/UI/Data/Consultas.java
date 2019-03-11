@@ -5,6 +5,8 @@
  */
 package proyectopoo.UI.Data;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -67,6 +69,11 @@ public class Consultas {
         this.total=new TableColumn("Precio Total:");
         this.cantidad.setMinWidth(0);
         
+        ObservableList<Label> tipos = FXCollections.observableArrayList();
+        tipos.add(new Label("Venta"));
+        tipos.add(new Label("Compra"));
+        this.Factura.setItems(tipos);
+        
         this.table.getColumns().addAll(cantidad,producto,precioU,iva,total);
         
         ColumnConstraints col1 = new ColumnConstraints();
@@ -79,6 +86,7 @@ public class Consultas {
         col3.setPercentWidth(20);
         ColumnConstraints col5 = new ColumnConstraints();
         col3.setPercentWidth(20);
+        
         this.head.getColumnConstraints().addAll(col1,col2,col3,col4,col5);
         
         
@@ -104,16 +112,30 @@ public class Consultas {
         this.root.setContent(head);
         this.root.setClosable(false);
     }
-
     public Tab getRoot() {
         return root;
     }
 
-    public void setRoot(Tab root) {
-        this.root = root;
+    public Label getValueCompra() {
+        return ValueCompra;
+    }
+
+    public void setValueCompra(Label ValueCompra) {
+        this.ValueCompra = ValueCompra;
+    }
+
+    public Button getBuscar() {
+        return buscar;
+    }
+
+    public void setBuscar(Button buscar) {
+        this.buscar = buscar;
     }
     
     
+    public void setRoot(Tab root) {
+        this.root = root;
+    }
     public Label getSelecFac() {
         return selecFac;
     }
@@ -129,43 +151,34 @@ public class Consultas {
     public void setDateFecha(Label dateFecha) {
         this.dateFecha = dateFecha;
     }
-
     public ComboBox getFactura() {
         return Factura;
     }
-
     public void setFactura(ComboBox Factura) {
         this.Factura = Factura;
     }
-
     public ComboBox getNumFactura() {
         return NumFactura;
     }
-
     public void setNumFactura(ComboBox NumFactura) {
         this.NumFactura = NumFactura;
     }
-
     public TableView getTable() {
         return table;
     }
-
     public void setTable(TableView table) {
         this.table = table;
     }
-
     public TableColumn getCantidad() {
         return cantidad;
     }
-
     public void setCantidad(TableColumn cantidad) {
         this.cantidad = cantidad;
     }
-
     public TableColumn getProducto() {
         return producto;
     }
-
+    
     public void setProducto(TableColumn producto) {
         this.producto = producto;
     }
