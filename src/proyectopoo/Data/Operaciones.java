@@ -26,6 +26,8 @@ public class Operaciones {
         this.precioVenta=0;
         this.entradas=0;
         this.precioCompra=precioCompra;
+        this.facturasV=new ArrayList<>();
+        this.facturasC=new ArrayList<>();
     }
     public void salida(int cantidad,double precio, int factura){
         this.existencias-=cantidad;

@@ -127,7 +127,7 @@ public class ControlVenta {
     class combo implements ChangeListener<Producto>{
         @Override
         public void changed(ObservableValue<? extends Producto> observable, Producto oldValue, Producto newValue) {
-             venta.getPrecio().setText(String.valueOf(newValue.getPrecioUnidad()));
+             if(newValue!=null)venta.getPrecio().setText(String.valueOf(newValue.getPrecioUnidad()));
         } 
     }
 
