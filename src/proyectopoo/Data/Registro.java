@@ -22,7 +22,7 @@ public class Registro {
         this.productos = new HashMap<>();
         for(Map.Entry<Integer,Double[]> e:datos.entrySet()){
             double a=e.getValue()[0];
-            this.productos.put(e.getKey(),new Operaciones((int)a,e.getValue()[1]));
+            this.productos.put(e.getKey(),new Operaciones((int)a,e.getValue()[1],fecha));
         }
         this.valorExistencias = valorExistencias;
         this.Ganancias = 0;

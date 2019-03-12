@@ -28,6 +28,15 @@ public class Inventario {
         this.actual=new Registro();
         this.Registros=new HashMap<>();
     }
+    public ArrayList<Operaciones> getKardex(int producto, Date fechaI, Date fechaF){
+        ArrayList<Operaciones> kardex=new ArrayList<>();
+        for(Map.Entry<Date,Registro> m:Registros.entrySet()){
+            if(m.getKey().after(fechaI)&&m.getKey().before(fechaF)){
+                kardex.add(m.getValue().getProductos().get(producto));
+            }
+        }
+        return kardex;
+    }
     
     public void Venta(ArrayList<Detalle>detalles, int factura){
         for(Detalle d:detalles){
@@ -46,7 +55,7 @@ public class Inventario {
     
     public void AñadirProducto(int id,String nombre,double precioV, double iva){
         this.productos.add(new Producto(id, nombre, 0, precioV,iva));
-        this.actual.getProductos().put(id,new Operaciones(0, 0));
+        this.actual.getProductos().put(id,new Operaciones(0, 0, new Date()));
     }
     
     public void añadirRegistro(){

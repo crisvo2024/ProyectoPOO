@@ -6,12 +6,14 @@
 package proyectopoo.Data;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
  * @author SANTIAGO
  */
 public class Operaciones {
+    private Date fecha;
     private int existencias;
     private int salidas;
     private double precioVenta;
@@ -20,7 +22,7 @@ public class Operaciones {
     private ArrayList<Integer>facturasV;
     private ArrayList<Integer>facturasC;
 
-    public Operaciones(int existencias, double precioCompra) {
+    public Operaciones(int existencias, double precioCompra, Date fecha) {
         this.existencias = existencias;
         this.salidas=0;
         this.precioVenta=0;
@@ -28,6 +30,7 @@ public class Operaciones {
         this.precioCompra=precioCompra;
         this.facturasV=new ArrayList<>();
         this.facturasC=new ArrayList<>();
+        this.fecha=fecha;
     }
     public void salida(int cantidad,double precio, int factura){
         this.existencias-=cantidad;
@@ -41,7 +44,15 @@ public class Operaciones {
         this.existencias+=cantidad;
         this.facturasC.add(factura);
     }
+    
+    public Date getFecha() {
+        return fecha;
+    }
 
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+    
     public int getExistencias() {
         return existencias;
     }

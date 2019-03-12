@@ -84,6 +84,10 @@ public class Kardex {
         root.setText("Kardex");
     }
 
+    public TableView getTable() {
+        return table;
+    }
+    
     public Tab getRoot() {
         return root;
     }

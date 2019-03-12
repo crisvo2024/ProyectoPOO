@@ -5,6 +5,7 @@
  */
 package proyectopoo.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -16,12 +17,16 @@ public class Balance {
     private Date fechaCorte;
     private double ganancias;
     private double costos;
+    private ArrayList<Registro>operaciones;
 
-    public Balance(Date fechaInicio, Date fechaCorte, double ganancias, double costos) {
+    public Balance(Date fechaInicio, Date fechaCorte, ArrayList<Registro> operaciones) {
         this.fechaInicio = fechaInicio;
         this.fechaCorte = fechaCorte;
-        this.ganancias = ganancias;
-        this.costos = costos;
+        this.ganancias = 0;
+        this.costos = 0;
+        this.operaciones = operaciones;        
     }
+
+    
     
 }

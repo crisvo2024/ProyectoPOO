@@ -47,4 +47,10 @@ public class Tienda {
         return facturasC;
     }
     
+    public ArrayList<Operaciones> getKardex(int producto, Date fechaI, Date fechaF){
+        return this.inventario.getKardex(producto, fechaI, fechaF);
+    }
+    public Balance getBalance(){
+        return null;
+    }
 }
