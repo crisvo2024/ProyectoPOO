@@ -50,7 +50,7 @@ public class ControlVenta {
         this.modelo=s.getModelo();
         this.venta.getAnadir().setOnAction(new anadir());
         this.detalles= FXCollections.observableArrayList();
-        this.productos=FXCollections.observableArrayList(this.modelo.getInventario().getProductos());
+        this.productos=FXCollections.observableArrayList(this.modelo.getInventario().getProductos().values());
         this.venta.getProducto().setConverter(new StringConverter<Producto>() {
             @Override
             public String toString(Producto producto) {
@@ -84,7 +84,7 @@ public class ControlVenta {
         @Override
         public void handle(Event event) {
             productos.clear();
-            productos.addAll(modelo.getInventario().getProductos());
+            productos.addAll(modelo.getInventario().getProductos().values());
         }
         
     }

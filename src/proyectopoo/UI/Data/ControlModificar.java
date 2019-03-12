@@ -29,7 +29,7 @@ public class ControlModificar {
         this.modificar = new Modificar();
         this.modificar.getGuardar().setOnAction(new guardar());
         this.modelo=new Tienda();
-        this.productos=FXCollections.observableArrayList(this.modelo.getInventario().getProductos());
+        this.productos=FXCollections.observableArrayList(this.modelo.getInventario().getProductos().values());
         this.modificar.getProductos().setConverter(new StringConverter<Producto>() {
             @Override
             public String toString(Producto producto){
@@ -50,7 +50,7 @@ public class ControlModificar {
     class guardar implements EventHandler<ActionEvent>{
         @Override
         public void handle(ActionEvent event) {
-            for(Producto p: modelo.getInventario().getProductos()){
+            for(Producto p: modelo.getInventario().getProductos().values()){
                 if(p.equals(modificar.getProductos().getValue())){
                     p.setNombre(modificar.getNewname().getText());
                     p.setPrecioUnidad(parseInt(modificar.getNewprecio().getText()));

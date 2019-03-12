@@ -33,7 +33,7 @@ public class ControlKardex {
         Singleton s=Singleton.getSingleton();
         this.modelo=s.getModelo();
         this.kardex=new Kardex();
-        productos=FXCollections.observableArrayList(this.modelo.getInventario().getProductos());
+        productos=FXCollections.observableArrayList(this.modelo.getInventario().getProductos().values());
         this.kardex.getSelecproducto().setConverter(new StringConverter<Producto>() {
             @Override
             public String toString(Producto producto) {
@@ -46,11 +46,13 @@ public class ControlKardex {
             }
         });
         this.kardex.getSelecproducto().setItems(productos);
+        this.kardex.getSelecproducto().getSelectionModel().clearSelection();
         this.kardex.getTcomprados().setCellValueFactory(new PropertyValueFactory("entradas"));
         this.kardex.getTexistencias().setCellValueFactory(new PropertyValueFactory("existencias"));
-        this.kardex.getTfecha().setCellValueFactory(new PropertyValueFactory("fecha"));
-        
-        this.kardex.getTvalor().setCellValueFactory(new PropertyValueFactory(""));
+        this.kardex.getTfecha().setCellValueFactory(new PropertyValueFactory("fechaK"));
+        this.kardex.getTvendidos().setCellValueFactory(new PropertyValueFactory("salidas"));
+        this.kardex.getTdetalle().setCellValueFactory(new PropertyValueFactory("detalles"));
+        this.kardex.getTvalor().setCellValueFactory(new PropertyValueFactory("valorE"));
         this.operaciones=FXCollections.observableArrayList();
         kardex.getTable().setItems(operaciones);
         this.kardex.getSelecproducto().setOnAction(new cambio());
@@ -63,7 +65,7 @@ public class ControlKardex {
         @Override
         public void handle(Event event) {
             productos.clear();
-            productos.addAll(modelo.getInventario().getProductos());
+            productos.addAll(modelo.getInventario().getProductos().values());
         }
         
     }
@@ -73,6 +75,8 @@ public class ControlKardex {
         public void handle(ActionEvent event) {
             if(kardex.getIni().getValue()!=null&&kardex.getFin().getValue()!=null&&kardex.getSelecproducto().getValue()!=null){
                 operaciones=FXCollections.observableArrayList(modelo.getKardex(((Producto)kardex.getSelecproducto().getValue()).getId(), Date.from(kardex.getIni().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(kardex.getFin().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())));
+                kardex.getTable().setItems(operaciones);
+                
             }
         }
         

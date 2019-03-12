@@ -5,8 +5,10 @@
  */
 package proyectopoo.Data;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -44,11 +46,30 @@ public class Operaciones {
         this.existencias+=cantidad;
         this.facturasC.add(factura);
     }
-    
+    public double getValorE(){
+        return existencias*precioCompra;
+    }
     public Date getFecha() {
         return fecha;
     }
-
+    public String getFechaK(){
+        SimpleDateFormat s=new SimpleDateFormat("dd/MM/yyyy");
+        return s.format(fecha);
+    }
+    public String getDetalles(){
+        String r="Facturas de venta: ";
+        for(Integer i:facturasV){
+            r+=i+",";
+        }
+        r+="\nFacturas de compra: ";
+        for(Integer i:facturasC){
+            r+=i;
+            if(!Objects.equals(i, facturasC.get(facturasC.size()-1))){
+                r+=",";
+            }
+        }
+        return r;
+    }
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }

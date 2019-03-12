@@ -56,7 +56,7 @@ public class ControlCompra {
         this.modelo=s.getModelo();
         this.compra.getAnadir().setOnAction(new anadir());
         this.detalles= FXCollections.observableArrayList();
-        this.productos=FXCollections.observableArrayList(this.modelo.getInventario().getProductos());
+        this.productos=FXCollections.observableArrayList(this.modelo.getInventario().getProductos().values());
         this.compra.getProducto().setConverter(new StringConverter<Producto>() {
             @Override
             public String toString(Producto producto) {
@@ -92,7 +92,7 @@ public class ControlCompra {
         @Override
         public void handle(Event event) {
             productos.clear();
-            productos.addAll(modelo.getInventario().getProductos());
+            productos.addAll(modelo.getInventario().getProductos().values());
         }
         
     }
@@ -135,7 +135,7 @@ public class ControlCompra {
                 double i=Double.parseDouble(result.get()[2]);
                 modelo.getInventario().AñadirProducto(modelo.getInventario().getProductos().size(), result.get()[0], p, i);
                 productos.clear();
-                productos.addAll(modelo.getInventario().getProductos());
+                productos.addAll(modelo.getInventario().getProductos().values());
             }
         }
         
