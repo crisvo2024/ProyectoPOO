@@ -175,9 +175,9 @@ public class ControlCompra {
             double totaliva=0;
             for(Detalle d:detalles){
                 total+=d.getTotal();
-                total+=d.getTotal();
+                totaliva+=d.getTotal()*modelo.getInventario().getProductos().get(d.getIdP()).getIva();
             }
-            compra.getTotal().setText("Total Iva: $"+totaliva+"Total: $"+total);            
+            compra.getTotal().setText("Total Iva: $"+totaliva+"\nTotal: $"+total);            
         }        
     }
     class combo implements ChangeListener<Producto>{

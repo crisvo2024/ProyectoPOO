@@ -84,6 +84,14 @@ public class Kardex {
         root.setText("Kardex");
     }
 
+    public Label getValuexist() {
+        return Valuexist;
+    }
+
+    public Label getTotalExist() {
+        return totalExist;
+    }
+    
     public TableView getTable() {
         return table;
     }

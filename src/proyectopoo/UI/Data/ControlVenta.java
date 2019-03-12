@@ -119,6 +119,7 @@ public class ControlVenta {
             Producto p=(Producto)venta.getProducto().getValue();
             if(p.getUnidades()>=Integer.parseInt(venta.getCantidad().getText())){
                 detalles.add(new Detalle(p.getId(), p.getNombre(), Double.parseDouble(venta.getPrecio().getText()),Integer.parseInt(venta.getCantidad().getText()),p.getIva()));
+                p.setUnidades(p.getUnidades()-Integer.parseInt(venta.getCantidad().getText()));
                 venta.getTable().setItems(detalles);
                 double total=0;
                 double totaliva=0;
