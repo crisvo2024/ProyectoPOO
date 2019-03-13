@@ -24,12 +24,6 @@ import javafx.scene.layout.GridPane;
 public class Modificar {
     private Tab root;
     private GridPane head;
-    private Label Producto;
-    private Label Nombre;
-    private Label PrecioDeVenta;
-    private Label Existencias;
-    private Label IVA;
-    private Label Nota;
     private ComboBox productos;
     private TextField newname;
     private TextField newprecio;
@@ -39,15 +33,7 @@ public class Modificar {
     private Button Guardar;
     
    public Modificar() {
-       
-        this.Producto=new Label("Producto");
-        this.Nombre=new Label("Nombre"); 
-        this.PrecioDeVenta=new Label("Precio de Venta"); 
-        this.Existencias=new Label("Existencias"); 
-        this.Nota=new Label("Nota: no se puede deshacer la modificacion \n de las existencias"); 
-        this.IVA=new Label("IVA"); 
         this.productos = new ComboBox();
-        
         this.root= new Tab();
         this.head=new GridPane();
         this.head.setPadding(new Insets(50));
@@ -70,12 +56,12 @@ public class Modificar {
         this.head.setAlignment(Pos.TOP_CENTER);
         
         this.head.add(new Label("Seleccione el producto que quiere modificar"), 0, 0,2,1);
-        this.head.add(Producto, 0, 2);
-        this.head.add(Nombre, 0, 3);
-        this.head.add(PrecioDeVenta, 0, 4);
-        this.head.add(Existencias, 0, 5);
-        this.head.add(IVA, 0, 6);
-        this.head.add(Nota, 0, 7,2,1);
+        this.head.add(new Label("Producto"), 0, 2);
+        this.head.add(new Label("Nombre"), 0, 3);
+        this.head.add(new Label("Precio de Venta"), 0, 4);
+        this.head.add(new Label("Existencias"), 0, 5);
+        this.head.add(new Label("IVA"), 0, 6);
+        this.head.add(new Label("Nota: no se puede deshacer la modificacion \n de las existencias"), 0, 7,2,1);
        
         this.head.add(productos, 1, 2);
         this.head.add(newname, 1, 3);

@@ -24,13 +24,8 @@ import javafx.scene.layout.GridPane;
  */
 public class Consultas {
     
-    private Label Tipo;
-    private Label Numero;
-    private Label Fecha;
-    private Label Facturas;
     private Label selecFac;
     private Label dateFecha;
-    private Label TotalCompra;
     private Label ValueCompra;
     private ComboBox Factura;
     private ComboBox NumFactura;
@@ -45,15 +40,10 @@ public class Consultas {
     private Tab root;
 
     public Consultas() {
-        this.Tipo = new Label("Tipo de factura: ");
-        this.Numero = new Label ("Numero de la factura: ");
-        this.Facturas = new Label("Factura:");
         this.Factura = new ComboBox();
         this.NumFactura = new ComboBox();
         this.selecFac = new Label("#********");
-        this.Fecha = new Label("Fecha:");
         this.dateFecha = new Label("DD/MM/YYYY");
-        this.TotalCompra = new Label("Total Compra: ");
         this.ValueCompra = new Label("$***.***");
         this.buscar = new Button("Buscar");
         this.table = new TableView();
@@ -86,20 +76,20 @@ public class Consultas {
         this.head.getColumnConstraints().addAll(col1,col2,col3,col4,col5);
         
         
-        this.head.add(Tipo, 0, 0,2,1);
-        this.head.add(Numero, 0, 1,2,1);
-        this.head.add(Facturas, 0, 4,1,1);
+        this.head.add(new Label("Tipo de factura: "), 0, 0,2,1);
+        this.head.add(new Label ("Numero de la factura: "), 0, 1,2,1);
+        this.head.add(new Label("Factura:"), 0, 4,1,1);
         this.head.add(table, 0, 5,7,2);
         
         this.head.add(Factura, 2, 0);
         this.head.add(NumFactura, 2, 1);
         
-        this.head.add(Fecha, 3, 4);
+        this.head.add(new Label("Fecha:"), 3, 4);
         this.head.add(dateFecha, 4, 4,2,1);
         this.head.add(buscar,4, 0,2,2);
         
         this.head.add(selecFac, 1, 4);
-        this.head.add(this.TotalCompra, 4, 7);
+        this.head.add(new Label("Total Compra: "), 4, 7);
         this.head.add(this.ValueCompra, 5, 7);
         head.setHgap(10);
         head.setVgap(10);
@@ -112,9 +102,6 @@ public class Consultas {
         return root;
     }
 
-    public Label getNumero() {
-        return Numero;
-    }
 
     public TableColumn getIva() {
         return iva;

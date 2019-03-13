@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Tab;
 import javafx.util.StringConverter;
 import proyectopoo.Data.Detalle;
 import proyectopoo.Data.Producto;
@@ -74,5 +75,7 @@ public class ControlModificar {
             }
         }        
     }
-    
+    public Tab getModificar(){
+        return modificar.getRoot();
+    }
 }
