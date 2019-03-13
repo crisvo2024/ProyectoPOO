@@ -77,7 +77,7 @@ public class VBalance {
         
         
         
-        Label Ventas = new Label("Ventas");
+        Label Ventas = new Label("Registros");
         Ventas.setMinSize(30, 40);
         
         Gtotales.setMinSize(30, 40);

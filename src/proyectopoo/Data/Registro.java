@@ -40,17 +40,35 @@ public class Registro {
         this.valorExistencias=0;
         this.Ganancias = 0;
     }
-    
-    public void venta(int id,int cantidad,double precio, int factura){
-        this.valorExistencias-=cantidad*this.productos.get(id).getPrecioCompra();
-        this.Ganancias+=cantidad*precio;
-        this.productos.get(id).salida(cantidad, precio,factura);        
+
+    public double getIvaC() {
+        return ivaC;
+    }
+
+    public void setIvaC(double ivaC) {
+        this.ivaC = ivaC;
+    }
+
+    public double getIvaV() {
+        return ivaV;
+    }
+
+    public void setIvaV(double ivaV) {
+        this.ivaV = ivaV;
     }
     
-    public void compra(int id,int cantidad,double precio, int factura){
+    public void venta(int id,int cantidad,double precio, int factura,double iva){
+        this.valorExistencias-=cantidad*this.productos.get(id).getPrecioCompra();
+        this.Ganancias+=cantidad*precio;
+        this.productos.get(id).salida(cantidad, precio,factura);
+        this.ivaV+=cantidad*precio*iva;
+    }
+    
+    public void compra(int id,int cantidad,double precio, int factura,double iva){
         this.valorExistencias+=cantidad*precio;
         this.costo+=cantidad*precio;
-        this.productos.get(id).entrada(cantidad, precio,factura);  
+        this.productos.get(id).entrada(cantidad, precio,factura);
+        this.ivaC+=cantidad*precio*iva;
     }
 
     public double getCosto() {

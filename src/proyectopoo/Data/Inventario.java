@@ -44,7 +44,7 @@ public class Inventario {
     public void Venta(ArrayList<Detalle>detalles, int factura){
         for(Detalle d:detalles){
             this.productos.get(d.getIdP()).setUnidades(this.productos.get(d.getIdP()).getUnidades()-d.getCantidad());
-            this.actual.venta(d.getIdP(), d.getCantidad(),d.getPrecioV(),factura);
+            this.actual.venta(d.getIdP(), d.getCantidad(),d.getPrecioV(),factura,this.productos.get(d.getIdP()).getIva());
         }
         
         
@@ -52,7 +52,7 @@ public class Inventario {
     public void Compra(ArrayList<Detalle>detalles, int factura){
         for(Detalle d:detalles){
             this.productos.get(d.getIdP()).setUnidades(this.productos.get(d.getIdP()).getUnidades()+d.getCantidad());
-            this.actual.compra(d.getIdP(), d.getCantidad(),d.getPrecioV(),factura);
+            this.actual.compra(d.getIdP(), d.getCantidad(),d.getPrecioV(),factura,this.productos.get(d.getIdP()).getIva());
         }
     }
     
