@@ -144,6 +144,13 @@ public class ControlCompra {
 
         @Override
         public void handle(ActionEvent event) {
+            if(detalles.isEmpty()){
+            Alert a=new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Añada primero un producto");
+            a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
+            a.show();
+            return;
+            }
             Alert a=new Alert(Alert.AlertType.CONFIRMATION);
             a.setContentText("¿Desea guardar asi?");
             a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
@@ -169,6 +176,13 @@ public class ControlCompra {
         @Override
         public void handle(ActionEvent event) {
             Producto p=(Producto)compra.getProducto().getValue();
+            if(p==null){
+                Alert a=new Alert(Alert.AlertType.ERROR);
+                a.setContentText("Seleccine un producto");
+                a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
+                a.show();
+                return;
+            }
             detalles.add(new Detalle(p.getId(), p.getNombre(), Double.parseDouble(compra.getPrecio().getText()),Integer.parseInt(compra.getCantidad().getText()),p.getIva()));
             compra.getTable().setItems(detalles);
             double total=0;

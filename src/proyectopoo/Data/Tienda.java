@@ -8,6 +8,7 @@ package proyectopoo.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -50,7 +51,16 @@ public class Tienda {
     public ArrayList<Operaciones> getKardex(int producto, Date fechaI, Date fechaF){
         return this.inventario.getKardex(producto, fechaI, fechaF);
     }
-    public Balance getBalance(){
-        return null;
+    public Balance getBalance(Date fechaI,Date fechaF){
+        ArrayList<Registro>reg=new ArrayList<>();
+        if(this.inventario.getActual().getFecha().after(fechaI)&&this.inventario.getActual().getFecha().before(fechaF)){
+            reg.add(this.inventario.getActual());
+        }
+        for(Map.Entry<Date,Registro> r:this.inventario.getRegistros().entrySet()){
+            if(r.getKey().after(fechaI)&&r.getKey().before(fechaF)){
+                reg.add(r.getValue());
+            }
+        }
+        return new Balance(fechaI, fechaF, reg);
     }
 }

@@ -92,6 +92,13 @@ public class ControlVenta {
 
         @Override
         public void handle(ActionEvent event) {
+            if(detalles.isEmpty()){
+                Alert a=new Alert(Alert.AlertType.ERROR);
+                a.setContentText("Añada un producto");
+                a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
+                a.show();
+                return;
+            }
             Alert a=new Alert(Alert.AlertType.CONFIRMATION);
             a.setContentText("¿Desea guardar asi?");
             a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
@@ -117,6 +124,13 @@ public class ControlVenta {
         @Override
         public void handle(ActionEvent event) {
             Producto p=(Producto)venta.getProducto().getValue();
+            if(p==null){
+                Alert a=new Alert(Alert.AlertType.ERROR);
+                a.setContentText("Seleccine un producto");
+                a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
+                a.show();
+                return;
+            }
             if(p.getUnidades()>=Integer.parseInt(venta.getCantidad().getText())){
                 detalles.add(new Detalle(p.getId(), p.getNombre(), Double.parseDouble(venta.getPrecio().getText()),Integer.parseInt(venta.getCantidad().getText()),p.getIva()));
                 p.setUnidades(p.getUnidades()-Integer.parseInt(venta.getCantidad().getText()));

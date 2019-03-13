@@ -32,7 +32,7 @@ public class ProyectoPOO extends Application {
         root.getTabs().add(new ControlCompra().getCompra());
         root.getTabs().add(new ControlModificar().getModificar());
         root.getTabs().add(new ControlConsulta().getConsulta());
-        root.getTabs().add(new VBalance().getRoot());
+        root.getTabs().add(new ControlBalance().getRoot());
         root.getTabs().add(new ControlKardex().getKardex());
         
         Scene value =new Scene(root, 800, 500);

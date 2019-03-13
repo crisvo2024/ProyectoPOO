@@ -136,6 +136,46 @@ public class VBalance {
         
     }
 
+    public TableColumn getFechat() {
+        return fechat;
+    }
+
+    public TableColumn getProductot() {
+        return productot;
+    }
+
+    public TableColumn getCantidadt() {
+        return cantidadt;
+    }
+
+    public TableColumn getIvat() {
+        return ivat;
+    }
+
+    public TableColumn getIngresot() {
+        return ingresot;
+    }
+
+    public TableColumn getFechac() {
+        return fechac;
+    }
+
+    public TableColumn getProductoc() {
+        return productoc;
+    }
+
+    public TableColumn getCantidadc() {
+        return cantidadc;
+    }
+
+    public TableColumn getIvac() {
+        return ivac;
+    }
+
+    public TableColumn getCostoc() {
+        return costoc;
+    }
+    
     public Tab getRoot() {
         return root;
     }
