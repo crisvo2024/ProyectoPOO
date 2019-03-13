@@ -27,6 +27,8 @@ public class Consultas {
     private Label selecFac;
     private Label dateFecha;
     private Label ValueCompra;
+    private Label Cliente;
+    private Label Documento;
     private ComboBox Factura;
     private ComboBox NumFactura;
     private Button buscar;
@@ -45,6 +47,8 @@ public class Consultas {
         this.selecFac = new Label("#********");
         this.dateFecha = new Label("DD/MM/YYYY");
         this.ValueCompra = new Label("$***.***");
+        this.Cliente=new Label();
+        this.Documento=new Label();
         this.buscar = new Button("Buscar");
         this.table = new TableView();
         this.head = new GridPane();
@@ -52,11 +56,11 @@ public class Consultas {
         
         buscar.setMinSize(100, 20);
         
-        this.cantidad=new TableColumn("Cantidad:");
-        this.producto=new TableColumn("Producto:");
-        this.precioU=new TableColumn("Precio Unitario:");
-        this.iva=new TableColumn("IVA:");
-        this.total=new TableColumn("Precio Total:");
+        this.cantidad=new TableColumn("Cantidad");
+        this.producto=new TableColumn("Producto");
+        this.precioU=new TableColumn("Precio Unitario");
+        this.iva=new TableColumn("IVA");
+        this.total=new TableColumn("Precio Total");
         this.cantidad.setMinWidth(0);
         
         
@@ -79,18 +83,22 @@ public class Consultas {
         this.head.add(new Label("Tipo de factura: "), 0, 0,2,1);
         this.head.add(new Label ("Numero de la factura: "), 0, 1,2,1);
         this.head.add(new Label("Factura:"), 0, 4,1,1);
-        this.head.add(table, 0, 5,7,2);
+        this.head.add(new Label("Cliente: "),0,5,1,1);
+        this.head.add(new Label("Documento: "), 2,5);
+        this.head.add(table, 0, 6,7,2);
         
         this.head.add(Factura, 2, 0);
         this.head.add(NumFactura, 2, 1);
+        this.head.add(Cliente, 1, 5);
         
         this.head.add(new Label("Fecha:"), 3, 4);
         this.head.add(dateFecha, 4, 4,2,1);
         this.head.add(buscar,4, 0,2,2);
+        this.head.add(Documento, 3, 5);
         
         this.head.add(selecFac, 1, 4);
-        this.head.add(new Label("Total Compra: "), 4, 7);
-        this.head.add(this.ValueCompra, 5, 7);
+        this.head.add(new Label("Total Compra: "), 4, 8);
+        this.head.add(this.ValueCompra, 5, 8);
         head.setHgap(10);
         head.setVgap(10);
         this.head.setPadding(new Insets(50));
@@ -100,6 +108,14 @@ public class Consultas {
     }
     public Tab getRoot() {
         return root;
+    }
+
+    public Label getCliente() {
+        return Cliente;
+    }
+
+    public Label getDocumento() {
+        return Documento;
     }
 
 

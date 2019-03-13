@@ -34,14 +34,14 @@ public class Tienda {
     public ArrayList<Factura> getFacturasV() {
         return facturasV;
     }
-    public void venta(ArrayList<Detalle> detalles, int factura){
+    public void venta(ArrayList<Detalle> detalles, int factura, String Cliente, int docCliemte){
         this.inventario.Venta(detalles, factura);
-        this.facturasV.add(new Factura(new Date(), factura, detalles));
+        this.facturasV.add(new Factura(new Date(), factura, detalles,Cliente,docCliemte));
     }
     
-    public void compra(ArrayList<Detalle> detalles, int factura){
+    public void compra(ArrayList<Detalle> detalles, int factura, String Cliente, int docCliemte){
         this.inventario.Compra(detalles, factura);
-        this.facturasC.add(new Factura(new Date(), factura, detalles));
+        this.facturasC.add(new Factura(new Date(), factura, detalles,Cliente,docCliemte));
     }
 
     public ArrayList<Factura> getFacturasC() {

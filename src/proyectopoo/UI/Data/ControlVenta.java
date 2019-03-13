@@ -75,6 +75,9 @@ public class ControlVenta {
         this.venta.getPrecio().setTextFormatter(formatter);
         this.venta.getCantidad().setTextFormatter(new TextFormatter<>(new IntegerStringConverter(),0,
             c ->Pattern.matches("\\d*", c.getText())? c : null));
+        this.venta.getDocCliente().setTextFormatter(new TextFormatter<>(new IntegerStringConverter(),0,
+            c ->Pattern.matches("\\d*", c.getText())? c : null));
+        this.venta.getDocCliente().setText("");
         this.venta.getNumero().setText("Factura: "+this.modelo.getFacturasV().size());
         this.venta.getContabilizar().setOnAction(new contabilizar());
         this.venta.getRoot().setOnSelectionChanged(new selected());
@@ -92,9 +95,9 @@ public class ControlVenta {
 
         @Override
         public void handle(ActionEvent event) {
-            if(detalles.isEmpty()){
+            if(detalles.isEmpty()||venta.getCliente().getText().equals("")||venta.getDocCliente().getText().equals("")){
                 Alert a=new Alert(Alert.AlertType.ERROR);
-                a.setContentText("Añada un producto");
+                a.setContentText("Es necesario que llene todos los campos y añada por lo menos 1 producto");
                 a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
                 a.show();
                 return;
@@ -109,8 +112,10 @@ public class ControlVenta {
             if(result.get()==ok){
                 ArrayList<Detalle>de=new ArrayList<>();
                 de.addAll(detalles);
-                modelo.venta(de, modelo.getFacturasV().size());
+                modelo.venta(de, modelo.getFacturasV().size(),venta.getCliente().getText(),Integer.parseInt(venta.getDocCliente().getText()));
                 venta.getProducto().setValue(null);
+                venta.getCliente().setText("");
+                venta.getDocCliente().setText("");
                 venta.getCantidad().setText("0");
                 venta.getPrecio().setText("0.0");
                 venta.getTotal().setText("Total: 0.0");
@@ -124,9 +129,9 @@ public class ControlVenta {
         @Override
         public void handle(ActionEvent event) {
             Producto p=(Producto)venta.getProducto().getValue();
-            if(p==null){
+            if(p==null||venta.getCantidad().getText().equals("0")||venta.getCantidad().getText().equals("")){
                 Alert a=new Alert(Alert.AlertType.ERROR);
-                a.setContentText("Seleccine un producto");
+                a.setContentText("Llene todos los campos");
                 a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
                 a.show();
                 return;

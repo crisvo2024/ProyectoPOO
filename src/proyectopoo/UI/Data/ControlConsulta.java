@@ -91,6 +91,8 @@ public class ControlConsulta {
             SimpleDateFormat s=new SimpleDateFormat("dd/MM/yyyy");
             consulta.getDateFecha().setText(s.format(f.getFecha()));
             consulta.getValueCompra().setText(String.valueOf(f.getTotal()));
+            consulta.getCliente().setText(f.getCliente());
+            consulta.getDocumento().setText(String.valueOf(f.getDocCliemte()));
         }        
     }
     class fact implements ChangeListener<String>{

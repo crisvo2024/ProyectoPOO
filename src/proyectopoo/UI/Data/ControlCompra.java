@@ -83,7 +83,9 @@ public class ControlCompra {
             c ->Pattern.matches("\\d*", c.getText())? c : null));
         this.compra.getNumero().setText("Factura: "+this.modelo.getFacturasC().size());
         this.compra.getAnadirP().setOnAction(new nuevo());
-        
+        this.compra.getDocCliente().setTextFormatter(new TextFormatter<>(new IntegerStringConverter(),0,
+            c ->Pattern.matches("\\d*", c.getText())? c : null));
+        this.compra.getDocCliente().setText("");
         this.compra.getContabilizar().setOnAction(new contabilizar());
         this.compra.getRoot().setOnSelectionChanged(new selected());
     }
@@ -144,12 +146,12 @@ public class ControlCompra {
 
         @Override
         public void handle(ActionEvent event) {
-            if(detalles.isEmpty()){
-            Alert a=new Alert(Alert.AlertType.ERROR);
-            a.setContentText("Añada primero un producto");
-            a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
-            a.show();
-            return;
+            if(detalles.isEmpty()||compra.getCliente().getText().equals("")||compra.getDocCliente().getText().equals("")){
+                Alert a=new Alert(Alert.AlertType.ERROR);
+                a.setContentText("Es necesario que llene todos los campos y añada por lo menos 1 producto");
+                a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
+                a.show();
+                return;
             }
             Alert a=new Alert(Alert.AlertType.CONFIRMATION);
             a.setContentText("¿Desea guardar asi?");
@@ -161,8 +163,10 @@ public class ControlCompra {
             if(result.get()==ok){
                 ArrayList<Detalle>de=new ArrayList<>();
                 de.addAll(detalles);
-                modelo.compra(de, modelo.getFacturasV().size());
+                modelo.compra(de, modelo.getFacturasV().size(),compra.getCliente().getText(),Integer.parseInt(compra.getDocCliente().getText()));
                 compra.getProducto().setValue(null);
+                compra.getCliente().setText("");
+                compra.getDocCliente().setText("");
                 compra.getCantidad().setText("0");
                 compra.getPrecio().setText("0.0");
                 compra.getTotal().setText("Total: 0.0");
@@ -176,9 +180,9 @@ public class ControlCompra {
         @Override
         public void handle(ActionEvent event) {
             Producto p=(Producto)compra.getProducto().getValue();
-            if(p==null){
+            if(p==null||compra.getCantidad().getText().equals("0")||compra.getCantidad().getText().equals("")){
                 Alert a=new Alert(Alert.AlertType.ERROR);
-                a.setContentText("Seleccine un producto");
+                a.setContentText("llene todos los campos");
                 a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
                 a.show();
                 return;
