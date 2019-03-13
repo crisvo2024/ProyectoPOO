@@ -6,6 +6,7 @@
 package proyectopoo.UI.Data;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +33,19 @@ public class ProyectoPOO extends Application {
     @Override
     public void start(Stage primaryStage) {
         Singleton singleton=Singleton.getSingleton();
-        singleton.setModelo(new Tienda());
+        GestionArchivos p= new GestionArchivos();
+        Tienda t=new Tienda();
+        try {
+            t.setFacturasV(p.LeerFactura("Archivos/FacturasV.txt"));
+            t.setFacturasC(p.LeerFactura("Archivos/FacturasC.txt"));
+            t.setInventario(p.LeerRegistro());
+        } catch (IOException ex) {
+            Logger.getLogger(ProyectoPOO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(ProyectoPOO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        singleton.setModelo(t);
         TabPane root=new TabPane();
         root.getTabs().add(new ControlVenta().getVenta());
         root.getTabs().add(new ControlCompra().getCompra());
@@ -48,7 +61,7 @@ public class ProyectoPOO extends Application {
         primaryStage.show();
         primaryStage.setOnCloseRequest((observable) -> {
             System.out.println("hola");
-            GestionArchivos p= new GestionArchivos();
+            
             try {
                 p.GuardarFactura(singleton.getModelo().getFacturasV(), "Archivos/FacturasV.txt");
                 p.GuardarFactura(singleton.getModelo().getFacturasC(), "Archivos/FacturasC.txt");

@@ -31,6 +31,18 @@ public class Tienda {
         return inventario;
     }
 
+    public void setInventario(Inventario inventario) {
+        this.inventario = inventario;
+    }
+
+    public void setFacturasV(ArrayList<Factura> facturasV) {
+        this.facturasV = facturasV;
+    }
+
+    public void setFacturasC(ArrayList<Factura> facturasC) {
+        this.facturasC = facturasC;
+    }
+    
     public ArrayList<Factura> getFacturasV() {
         return facturasV;
     }
