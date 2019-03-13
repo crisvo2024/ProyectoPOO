@@ -166,18 +166,6 @@ public class Kardex {
         this.tvalor = tvalor;
     }
 
-    public Label getTotalExist() {
-        return totalExist;
-    }
-
-    public void setTotalExist(Label totalExist) {
-        this.totalExist = totalExist;
-    }
-
-    public Label getValuexist() {
-        return Valuexist;
-    }
-
     public void setValuexist(Label Valuexist) {
         this.Valuexist = Valuexist;
     }
