@@ -82,11 +82,11 @@ public class VBalance {
         head.getChildren().add(l1);
         
         
-        Label Ventas = new Label("Ventas");
-        Ventas.setMinSize(30, 40);
-        
         Label Compras = new Label("Compras");
         Compras.setMinSize(30, 40);
+        
+        Label Ventas = new Label("Ventas");
+        Ventas.setMinSize(30, 40);
         
         Gtotales.setMinSize(30, 40);
         this.gtvalue.setMinSize(30, 40);
@@ -101,7 +101,7 @@ public class VBalance {
         this.productot=new TableColumn("Producto:");
         this.cantidadt=new TableColumn("Cantidad:");
         this.ivat=new TableColumn("IVA:");
-        this.ingresot=new TableColumn("Costo:");
+        this.ingresot=new TableColumn("Ganancias:");
         this.tventas.getColumns().addAll(fechat,productot,cantidadt,ivat,ingresot);
         
         head.getChildren().add(Compras);
