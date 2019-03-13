@@ -24,23 +24,13 @@ import javafx.scene.layout.VBox;
 public class VBalance {
     private Tab root;
     private VBox head;
-    private GridPane l1;
-    private GridPane l6;
-    private GridPane l7;
-    private Label Ventas;
     private DatePicker fechai;
-    private Label Compras;
     private DatePicker fechaf;
     private TableView tventas;
     private TableView tcompras;
     private Label gtvalue;
     private Label ctvalue;
-    private Label Gtotales;
-    private Label Ctotales;
-    private Label BGeneral;
     private Label bgvalue;
-    private Label Finicio;
-    private Label Ffinal;
     private Button Consultar;
     private TableColumn fechat;
     private TableColumn productot;
@@ -57,20 +47,18 @@ public class VBalance {
     
     public VBalance() {
         this.head = new VBox();
-        this.l1 = new GridPane();
-        this.l6 = new GridPane();
-        this.l7 = new GridPane();
-        this.Ventas = new Label("Ventas");
+        GridPane l1 = new GridPane();
+        GridPane l6 = new GridPane();
+        GridPane l7 = new GridPane();
         this.fechai = new DatePicker();
-        this.Compras = new Label("Compras");
         this.fechaf = new DatePicker();;
         this.tventas = new TableView();
         this.tcompras = new TableView();
-        this.Gtotales = new Label("Ganancias Totales");
-        this.Ctotales = new Label("Costol Totales");
-        this.BGeneral = new Label("Balance General");
-        this.Finicio = new Label("Fecha de Inicio");
-        this.Ffinal = new Label("Fecha final");
+        Label Gtotales = new Label("Ganancias Totales");
+        Label Ctotales = new Label("Costol Totales");
+        Label BGeneral = new Label("Balance General");
+        Label Finicio = new Label("Fecha de Inicio:");
+        Label Ffinal = new Label("Fecha final:");
         this.Consultar = new Button("Consultar");
         this.gtvalue = new Label("$*****");
         this.ctvalue = new Label("$*****");
@@ -78,8 +66,8 @@ public class VBalance {
         this.root = new Tab();
         
         
-        this.Finicio.setMinSize(30, 40);
-        this.Ffinal.setMinSize(30, 40);
+        Finicio.setMinSize(30, 40);
+        Ffinal.setMinSize(30, 40);
         GridPane fechas = new GridPane();
         fechas.add(Finicio, 0, 0);
         fechas.add(Ffinal, 1, 0);
@@ -94,15 +82,18 @@ public class VBalance {
         head.getChildren().add(l1);
         
         
+        Label Ventas = new Label("Ventas");
+        Ventas.setMinSize(30, 40);
         
-        this.Ventas.setMinSize(30, 40);
-        this.Compras.setMinSize(30, 40);
-        this.Gtotales.setMinSize(30, 40);
+        Label Compras = new Label("Compras");
+        Compras.setMinSize(30, 40);
+        
+        Gtotales.setMinSize(30, 40);
         this.gtvalue.setMinSize(30, 40);
-        this.Ctotales.setMinSize(30, 40);
+        Ctotales.setMinSize(30, 40);
         this.ctvalue.setMinSize(30, 40);
         this.bgvalue.setMinSize(30, 40);
-        this.BGeneral.setMinSize(30, 40);
+        BGeneral.setMinSize(30, 40);
         
         head.getChildren().add(Ventas);
         head.getChildren().add(tventas);
