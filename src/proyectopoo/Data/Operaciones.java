@@ -34,6 +34,18 @@ public class Operaciones {
         this.facturasC=new ArrayList<>();
         this.fecha=fecha;
     }
+
+    public Operaciones(Date fecha, int existencias, int salidas, double precioVenta, int entradas, double precioCompra, ArrayList<Integer> facturasV, ArrayList<Integer> facturasC) {
+        this.fecha = fecha;
+        this.existencias = existencias;
+        this.salidas = salidas;
+        this.precioVenta = precioVenta;
+        this.entradas = entradas;
+        this.precioCompra = precioCompra;
+        this.facturasV = facturasV;
+        this.facturasC = facturasC;
+    }
+    
     public void salida(int cantidad,double precio, int factura){
         this.existencias-=cantidad;
         this.salidas+=cantidad;
