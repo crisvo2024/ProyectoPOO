@@ -19,6 +19,7 @@ public class Factura {
     private ArrayList<Detalle> Entradas;
     private String Cliente;
     private int docCliemte;
+    
     public Factura(Date fecha, int numero, ArrayList<Detalle> Entradas, String Cliente, int docCliemte) {
         this.fecha = fecha;
         this.numero = numero;
@@ -30,6 +31,16 @@ public class Factura {
             this.total+=d.getTotal();
         }
     }
+
+    public Factura(Date fecha, double total, int numero, ArrayList<Detalle> Entradas, String Cliente, int docCliemte) {
+        this.fecha = fecha;
+        this.total = total;
+        this.numero = numero;
+        this.Entradas = Entradas;
+        this.Cliente = Cliente;
+        this.docCliemte = docCliemte;
+    }
+    
 
     public String getCliente() {
         return Cliente;

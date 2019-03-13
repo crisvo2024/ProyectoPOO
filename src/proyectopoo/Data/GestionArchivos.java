@@ -58,14 +58,13 @@ public class GestionArchivos {
     
     public Inventario LeerRegistro() throws IOException, ParseException{
         SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
-        Inventario inventario = new Inventario();
+        
         File archivo = new File("Archivos/Productos.txt");
         FileInputStream fa = new FileInputStream (archivo); 
         BufferedReader x = new BufferedReader(new InputStreamReader(fa));
         HashMap<Integer,Producto> productos = new HashMap<>();
-        String b="";
+        String b=x.readLine();
         while(x.ready()){
-            b=x.readLine();
             String[] lectura = b.split(":");
             //x.write(p.getId()+":"+p.getNombre()+":"+p.getUnidades()+":"+p.getPrecioUnidad()+":"+p.getIva()+"\n");
             int id = parseInt(lectura[0]);
@@ -73,6 +72,9 @@ public class GestionArchivos {
             int unidades = parseInt(lectura[2]);
             double precioUnidad = parseDouble(lectura[3]);
             double iva = parseDouble(lectura[4]);
+            Producto producto = new Producto(id,nombre,unidades,precioUnidad,iva);
+            productos.put(id, producto);
+            b = x.readLine();
         }
         
         HashMap<Date,Registro> registros = new HashMap<>();
@@ -126,14 +128,11 @@ public class GestionArchivos {
                 }
                 
                 //Registro(Date fecha, HashMap<Integer, Operaciones> productos, double valorExistencias, double Ganancias, double costo, double ivaC, double ivaV)
-                //Registro registro = new Registro(fechaop,operaciones);
-                
-            }
+                    Registro registro = new Registro(fechaop,operaciones,ValueExistencias,Ganancias,Costo,IvaV,IvaC);
+                    registros.put(fechaop, registro);
+                }
         
-            
-            
-            
-        
+        Inventario inventario = new Inventario(productos,registros);
         return inventario;
     }
     
@@ -149,9 +148,9 @@ public class GestionArchivos {
         for(Factura f: factura){
             SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
             
-            x.write(fecha.format(f.fecha)+":"+f.numero+"\n");
+            x.write(fecha.format(f.getFecha())+":"+f.getNumero()+":"+f.getCliente()+":"+f.getDocCliemte()+"\n");
             
-            for(Detalle d: f.Entradas){
+            for(Detalle d: f.getEntradas()){
             x.write("-"+":"+d.idP+":"+d.getNombreP()+":"+d.precioV+":"+d.cantidad+":"+d.iva+"\n");
             }
             x.write("\n");
@@ -171,6 +170,8 @@ public class GestionArchivos {
             String[] lectura = b.split(":");
             Date fecha = format.parse(lectura[0]);
             int numero = parseInt(lectura[1]); 
+            String nCliente = lectura[2]; 
+            int cedula = parseInt(lectura[3]); 
             b = x.readLine();
             while(b.contains("-")){
             lectura = b.split(":");
@@ -178,7 +179,7 @@ public class GestionArchivos {
             b = x.readLine();
             }
             
-            fc.add(new Factura(fecha,numero,dt));
+            fc.add(new Factura(fecha,numero,dt,nCliente,cedula));
         }
         x.close();
         return fc;

@@ -28,6 +28,12 @@ public class Inventario {
         this.actual=new Registro();
         this.Registros=new HashMap<>();
     }
+
+    public Inventario(HashMap<Integer, Producto> productos, HashMap<Date, Registro> Registros) {
+        this.productos = productos;
+        this.Registros = Registros;
+    }
+    
     public ArrayList<Operaciones> getKardex(int producto, Date fechaI, Date fechaF){
         ArrayList<Operaciones> kardex=new ArrayList<>();
         if(actual.getFecha().after(fechaI)&&actual.getFecha().before(fechaF)){
