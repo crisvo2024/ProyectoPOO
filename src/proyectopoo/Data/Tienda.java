@@ -23,7 +23,6 @@ public class Tienda {
         inventario=new Inventario();
         facturasC=new ArrayList<>();
         facturasV=new ArrayList<>();
-        inventario.AñadirProducto(0, "Lapiz", 1000,0.19);
         
     }
     

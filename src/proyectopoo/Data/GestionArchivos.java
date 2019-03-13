@@ -80,8 +80,9 @@ public class GestionArchivos {
         FileInputStream fa = new FileInputStream (archivo); 
         BufferedReader x = new BufferedReader(new InputStreamReader(fa));
         HashMap<Integer,Producto> productos = new HashMap<>();
-        String b=x.readLine();
+        String b;
         while(x.ready()){
+            b=x.readLine();
             String[] lectura = b.split(":");
             //x.write(p.getId()+":"+p.getNombre()+":"+p.getUnidades()+":"+p.getPrecioUnidad()+":"+p.getIva()+"\n");
             int id = parseInt(lectura[0]);
@@ -91,7 +92,7 @@ public class GestionArchivos {
             double iva = parseDouble(lectura[4]);
             Producto producto = new Producto(id,nombre,unidades,precioUnidad,iva);
             productos.put(id, producto);
-            b = x.readLine();
+            
         }
         Registro act = new Registro();
         File archivo3 = new File("Archivos/RegistroActual.txt");
@@ -108,9 +109,9 @@ public class GestionArchivos {
                 double IvaVo =  parseDouble(lectura3[5]);
                 b = tt.readLine();
                 HashMap <Integer,Operaciones> operacioneso= new HashMap<>();
-                while(b.contains("*")){
+                while(b!=null&&b.contains("*")){
  //y.write(fecha.format(registro.getFecha())+":"+registro.getValorExistencias()+":"+registro.getGanancias()+":"+registro.getCosto()+":"+registro.getIvaC()+":"+registro.getIvaV()+"\n");
-                        
+                        lectura3=b.split(":");
                         int key = parseInt(lectura3[1]);
                         fechaop = fecha.parse(lectura3[2]);
                         int Existencias = parseInt(lectura3[3]);
@@ -121,20 +122,19 @@ public class GestionArchivos {
                         b=tt.readLine();
                         ArrayList<Integer> fVentas = new ArrayList<>();
                         ArrayList<Integer> fCompras = new ArrayList<>();
-                        while(b.contains("-")){
+                        while(b!=null&&b.contains("-")){
                             //y.write("-"+":"+numfac+"\n");
                             lectura3 = b.split(":");
-                            for(int i=0;i<lectura3.length;i++){
-                                fVentas.add(parseInt(lectura3[i]));
+                            for(int i=0;i<lectura3.length-1;i++){
+                                fVentas.add(parseInt(lectura3[i+1]));
                             }
                             b=tt.readLine();
                         }
-               
-                        while(b.contains("+")){
+                        while(b!=null&&b.contains("+")){
                             //y.write("-"+":"+numfac+"\n");
                             lectura3 = b.split(":");
-                            for(int i=0;i<lectura3.length;i++){
-                                fCompras.add(parseInt(lectura3[i]));
+                            for(int i=0;i<lectura3.length-1;i++){
+                                fCompras.add(parseInt(lectura3[i+1]));
                             }
                             b=tt.readLine();
                         }
@@ -183,8 +183,8 @@ public class GestionArchivos {
                         while(b.contains("-")){
                             //y.write("-"+":"+numfac+"\n");
                             lectura2 = b.split(":");
-                            for(int i=0;i<lectura2.length;i++){
-                                fVentas.add(parseInt(lectura2[i]));
+                            for(int i=0;i<lectura2.length-1;i++){
+                                fVentas.add(parseInt(lectura2[i+1]));
                             }
                             b=yy.readLine();
                         }
@@ -192,8 +192,8 @@ public class GestionArchivos {
                         while(b.contains("+")){
                             //y.write("-"+":"+numfac+"\n");
                             lectura2 = b.split(":");
-                            for(int i=0;i<lectura2.length;i++){
-                                fCompras.add(parseInt(lectura2[i]));
+                            for(int i=0;i<lectura2.length-1;i++){
+                                fCompras.add(parseInt(lectura2[i+1]));
                             }
                             b=yy.readLine();
                         }
