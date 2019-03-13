@@ -37,14 +37,6 @@ public class ControlBalance {
         Singleton s=Singleton.getSingleton();
         this.modelo = s.getModelo();
         
-        this.balance.getCantidadc().setCellValueFactory(new PropertyValueFactory("entradas"));
-        this.balance.getFechac().setCellValueFactory(new PropertyValueFactory("fechaK"));
-        this.balance.getFechat().setCellValueFactory(new PropertyValueFactory("fechaK"));
-        this.balance.getCantidadt().setCellValueFactory(new PropertyValueFactory("salidas"));
-        this.balance.getIngresot().setCellValueFactory(new PropertyValueFactory("precioVenta"));
-        this.balance.getIvat().setCellFactory(new PropertyValueFactory("iva"));
-        this.balance.getIvac().setCellFactory(new PropertyValueFactory("iva"));
-        this.balance.getCostoc().setCellValueFactory(new PropertyValueFactory("costo"));
         
         this.balance.getRoot().setOnSelectionChanged(new selected());
     }
