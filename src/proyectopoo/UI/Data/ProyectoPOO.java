@@ -8,6 +8,7 @@ package proyectopoo.UI.Data;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -43,6 +44,12 @@ public class ProyectoPOO extends Application {
             Logger.getLogger(ProyectoPOO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(ProyectoPOO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Calendar c=Calendar.getInstance();
+        Calendar actual= Calendar.getInstance();
+        actual.setTime(t.getInventario().getActual().getFecha());
+        if(actual.get(Calendar.DAY_OF_MONTH)!=c.get(Calendar.DAY_OF_MONTH)){
+            t.getInventario().añadirRegistro();
         }
         
         singleton.setModelo(t);

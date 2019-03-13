@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.text.ParseException;
@@ -53,22 +54,23 @@ public class GestionArchivos {
         x.close();
         
         File archivo2 = new File("Archivos/Registros.txt");
-        FileWriter y= new FileWriter(archivo2);
+        archivo2.createNewFile();
+        PrintStream y= new PrintStream(archivo2);
         
         for(Registro reg: inventario.getRegistros().values()){
             SimpleDateFormat fec = new SimpleDateFormat("dd/MM/yyyy");
           
-            y.write(fec.format(reg.getFecha())+":"+reg.getValorExistencias()+":"+reg.getGanancias()+":"+reg.getCosto()+":"+reg.getIvaC()+":"+reg.getIvaV()+"\n");
+            y.print(fec.format(reg.getFecha())+":"+reg.getValorExistencias()+":"+reg.getGanancias()+":"+reg.getCosto()+":"+reg.getIvaC()+":"+reg.getIvaV()+"\n");
             for (Map.Entry<Integer, Operaciones> entry : reg.getProductos().entrySet()) {
-                y.write("*"+":"+entry.getKey()+":"+entry.getValue().getFecha()+":"+entry.getValue().getExistencias()+":"+entry.getValue().getSalidas()+":"+entry.getValue().getPrecioVenta()+":"+entry.getValue().getEntradas()+":"+entry.getValue().getPrecioCompra()+"\n");
+                y.print("*"+":"+entry.getKey()+":"+entry.getValue().getFechaK()+":"+entry.getValue().getExistencias()+":"+entry.getValue().getSalidas()+":"+entry.getValue().getPrecioVenta()+":"+entry.getValue().getEntradas()+":"+entry.getValue().getPrecioCompra()+"\n");
                 for(int numfac: entry.getValue().getFacturasV()){
-                    y.write("-"+":"+numfac+"\n");
+                    y.print("-"+":"+numfac+"\n");
                 }
                 for(int numfac: entry.getValue().getFacturasC()){
-                    y.write("+"+":"+numfac+"\n");
+                    y.print("+"+":"+numfac+"\n");
                 }
             }
-            y.write("\n");
+            y.print("\n");
         }
     }
     
