@@ -27,6 +27,23 @@ import java.util.Map;
  */
 public class GestionArchivos {
     public void GuardarRegistro(Inventario inventario) throws IOException{
+        
+        File archivo3 = new File("Archivos/RegistroActual.txt");
+        FileWriter k= new FileWriter(archivo3);
+        
+        Registro registro= inventario.getActual();
+        SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+        k.write(fecha.format(registro.getFecha())+":"+registro.getValorExistencias()+":"+registro.getGanancias()+":"+registro.getCosto()+":"+registro.getIvaC()+":"+registro.getIvaV()+"\n");
+            for (Map.Entry<Integer, Operaciones> entry : registro.getProductos().entrySet()) {
+                k.write("*"+":"+entry.getKey()+":"+entry.getValue().getFechaK()+":"+entry.getValue().getExistencias()+":"+entry.getValue().getSalidas()+":"+entry.getValue().getPrecioVenta()+":"+entry.getValue().getEntradas()+":"+entry.getValue().getPrecioCompra()+"\n");
+                for(int numfac: entry.getValue().getFacturasV()){
+                    k.write("-"+":"+numfac+"\n");
+                }
+                for(int numfac: entry.getValue().getFacturasC()){
+                    k.write("+"+":"+numfac+"\n");
+                }
+            }
+            k.close();
         File archivo = new File("Archivos/Productos.txt");
         archivo.createNewFile();
         FileWriter x= new FileWriter(archivo);
@@ -36,14 +53,13 @@ public class GestionArchivos {
         x.close();
         
         File archivo2 = new File("Archivos/Registros.txt");
-        archivo.createNewFile();
         FileWriter y= new FileWriter(archivo2);
         
-        for(Registro registro: inventario.getRegistros().values()){
-            SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+        for(Registro reg: inventario.getRegistros().values()){
+            SimpleDateFormat fec = new SimpleDateFormat("dd/MM/yyyy");
           
-            y.write(fecha.format(registro.getFecha())+":"+registro.getValorExistencias()+":"+registro.getGanancias()+":"+registro.getCosto()+":"+registro.getIvaC()+":"+registro.getIvaV()+"\n");
-            for (Map.Entry<Integer, Operaciones> entry : registro.getProductos().entrySet()) {
+            y.write(fec.format(reg.getFecha())+":"+reg.getValorExistencias()+":"+reg.getGanancias()+":"+reg.getCosto()+":"+reg.getIvaC()+":"+reg.getIvaV()+"\n");
+            for (Map.Entry<Integer, Operaciones> entry : reg.getProductos().entrySet()) {
                 y.write("*"+":"+entry.getKey()+":"+entry.getValue().getFecha()+":"+entry.getValue().getExistencias()+":"+entry.getValue().getSalidas()+":"+entry.getValue().getPrecioVenta()+":"+entry.getValue().getEntradas()+":"+entry.getValue().getPrecioCompra()+"\n");
                 for(int numfac: entry.getValue().getFacturasV()){
                     y.write("-"+":"+numfac+"\n");
@@ -56,9 +72,10 @@ public class GestionArchivos {
         }
     }
     
+    
     public Inventario LeerRegistro() throws IOException, ParseException{
         SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
-        
+        Date fechaop = new Date();
         File archivo = new File("Archivos/Productos.txt");
         FileInputStream fa = new FileInputStream (archivo); 
         BufferedReader x = new BufferedReader(new InputStreamReader(fa));
@@ -76,13 +93,70 @@ public class GestionArchivos {
             productos.put(id, producto);
             b = x.readLine();
         }
+        Registro act = new Registro();
+        File archivo3 = new File("Archivos/RegistroActual.txt");
+        FileInputStream qq = new FileInputStream (archivo3); 
+        BufferedReader tt = new BufferedReader(new InputStreamReader(qq));
+        b = tt.readLine();
+        Date fechaopp = new Date();
+                String lectura3[]=b.split(":");
+                Date fechaRegistroo = fecha.parse(lectura3[0]);
+                double ValueExistenciaso =  parseDouble(lectura3[1]);
+                double Gananciaso =  parseDouble(lectura3[2]);
+                double Costoo =  parseDouble(lectura3[3]);
+                double IvaCo =  parseDouble(lectura3[4]);
+                double IvaVo =  parseDouble(lectura3[5]);
+                b = tt.readLine();
+                HashMap <Integer,Operaciones> operacioneso= new HashMap<>();
+                while(b.contains("*")){
+ //y.write(fecha.format(registro.getFecha())+":"+registro.getValorExistencias()+":"+registro.getGanancias()+":"+registro.getCosto()+":"+registro.getIvaC()+":"+registro.getIvaV()+"\n");
+                        
+                        int key = parseInt(lectura3[1]);
+                        fechaop = fecha.parse(lectura3[2]);
+                        int Existencias = parseInt(lectura3[3]);
+                        int Salidas = parseInt(lectura3[4]);
+                        Double precioVenta = parseDouble(lectura3[5]);
+                        int Entradas = parseInt(lectura3[6]);
+                        Double precioCompra = parseDouble(lectura3[7]);
+                        b=tt.readLine();
+                        ArrayList<Integer> fVentas = new ArrayList<>();
+                        ArrayList<Integer> fCompras = new ArrayList<>();
+                        while(b.contains("-")){
+                            //y.write("-"+":"+numfac+"\n");
+                            lectura3 = b.split(":");
+                            for(int i=0;i<lectura3.length;i++){
+                                fVentas.add(parseInt(lectura3[i]));
+                            }
+                            b=tt.readLine();
+                        }
+               
+                        while(b.contains("+")){
+                            //y.write("-"+":"+numfac+"\n");
+                            lectura3 = b.split(":");
+                            for(int i=0;i<lectura3.length;i++){
+                                fCompras.add(parseInt(lectura3[i]));
+                            }
+                            b=tt.readLine();
+                        }
+                    Operaciones ope = new Operaciones(fechaop,Existencias,Salidas,precioVenta,Entradas,precioCompra,fVentas,fCompras);
+                    operacioneso.put(key, ope);
+                }
+                
+                //Registro(Date fecha, HashMap<Integer, Operaciones> productos, double valorExistencias, double Ganancias, double costo, double ivaC, double ivaV)
+                    Registro registroact = new Registro(fechaop,operacioneso,ValueExistenciaso,Gananciaso,Costoo,IvaVo,IvaCo);
+        
+        
+        
+        
+        
+        
         
         HashMap<Date,Registro> registros = new HashMap<>();
         File archivo2 = new File("Archivos/Registros.txt");
         FileInputStream pp = new FileInputStream (archivo2); 
         BufferedReader yy = new BufferedReader(new InputStreamReader(pp));
         b = yy.readLine();
-        Date fechaop = new Date();
+        
             while(yy.ready()){
                 String lectura2[]=b.split(":");
                 Date fechaRegistro = fecha.parse(lectura2[0]);
@@ -132,7 +206,11 @@ public class GestionArchivos {
                     registros.put(fechaop, registro);
                 }
         
-        Inventario inventario = new Inventario(productos,registros);
+            
+            
+                    
+            
+        Inventario inventario = new Inventario(productos,registroact,registros);
         return inventario;
     }
     
