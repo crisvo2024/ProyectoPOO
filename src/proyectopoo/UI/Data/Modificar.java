@@ -29,7 +29,6 @@ public class Modificar {
     private TextField newprecio;
     private TextField newexistencias;
     private TextField newIVA;
-    
     private Button Guardar;
     
    public Modificar() {
