@@ -5,6 +5,10 @@
  */
 package proyectopoo.UI.Data;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +19,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javax.swing.text.TableView;
+import proyectopoo.Data.Factura;
+import proyectopoo.Data.GestionArchivos;
 import proyectopoo.Data.Tienda;
 
 /**
@@ -38,14 +44,28 @@ public class ProyectoPOO extends Application {
         Scene value =new Scene(root, 800, 500);
         value.getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
         primaryStage.setScene(value);
+        
         primaryStage.show();
+        primaryStage.setOnCloseRequest((observable) -> {
+            System.out.println("hola");
+            GestionArchivos p= new GestionArchivos();
+            try {
+                p.GuardarFactura(singleton.getModelo().getFacturasV(), "Archivos/FacturasV.txt");
+                p.GuardarFactura(singleton.getModelo().getFacturasC(), "Archivos/FacturasC.txt");
+                p.GuardarRegistro(singleton.getModelo().getInventario());
+            } catch (IOException ex) {
+                Logger.getLogger(ProyectoPOO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         launch(args);
+        
     }
     
 }
