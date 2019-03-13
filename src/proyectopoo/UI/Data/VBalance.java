@@ -30,12 +30,13 @@ public class VBalance {
     private Label gtvalue;
     private Label ctvalue;
     private Label bgvalue;
+    private Label ivaT;
     private Button Consultar;
     private TableColumn fechat;
-    private TableColumn productot;
-    private TableColumn cantidadt; 
-    private TableColumn ivat;
-    private TableColumn ingresot;
+    private TableColumn costos;
+    private TableColumn ivac; 
+    private TableColumn ivaV;
+    private TableColumn ganancias;
 
 
     
@@ -50,12 +51,14 @@ public class VBalance {
         Label Gtotales = new Label("Ganancias Totales");
         Label Ctotales = new Label("Costol Totales");
         Label BGeneral = new Label("Balance General");
+        Label IvaP=new Label("Iva a pagar:");
         Label Finicio = new Label("Fecha de Inicio:");
         Label Ffinal = new Label("Fecha final:");
         this.Consultar = new Button("Consultar");
         this.gtvalue = new Label("$*****");
         this.ctvalue = new Label("$*****");
         this.bgvalue = new Label("$*****");
+        this.ivaT = new Label("$*****");
         this.root = new Tab();
         
         
@@ -89,12 +92,12 @@ public class VBalance {
         
         head.getChildren().add(Ventas);
         head.getChildren().add(tventas);
-        this.fechat=new TableColumn("Fecha:");
-        this.productot=new TableColumn("Producto:");
-        this.cantidadt=new TableColumn("Cantidad:");
-        this.ivat=new TableColumn("IVA:");
-        this.ingresot=new TableColumn("Ganancias:");
-        this.tventas.getColumns().addAll(fechat,productot,cantidadt,ivat,ingresot);
+        this.fechat=new TableColumn("Fecha");
+        this.ivac=new TableColumn("IVA Comprado");
+        this.ivaV=new TableColumn("IVA Vendido");
+        this.ganancias=new TableColumn("Ganancias");
+        this.costos=new TableColumn("Costos");
+        this.tventas.getColumns().addAll(fechat,ivac,ivaV,ganancias,costos);
         
         l6.add(Gtotales,1,0);
         l6.add(gtvalue,2,0);
@@ -106,6 +109,8 @@ public class VBalance {
         head.getChildren().add(l6);
         l7.add(BGeneral,1,0);
         l7.add(bgvalue,2,0);
+        l7.add(IvaP,1,1);
+        l7.add(ivaT,2,1);
         l7.setAlignment(Pos.CENTER);
         l7.setHgap(10);
         l7.setVgap(10);
@@ -118,27 +123,6 @@ public class VBalance {
         root.setClosable(false);
         
     }
-
-    public TableColumn getFechat() {
-        return fechat;
-    }
-
-    public TableColumn getProductot() {
-        return productot;
-    }
-
-    public TableColumn getCantidadt() {
-        return cantidadt;
-    }
-
-    public TableColumn getIvat() {
-        return ivat;
-    }
-
-    public TableColumn getIngresot() {
-        return ingresot;
-    }
-    
     public Tab getRoot() {
         return root;
     }
@@ -146,40 +130,61 @@ public class VBalance {
     public void setRoot(Tab root) {
         this.root = root;
     }
-    
-    
-    public DatePicker getFechai() {
-        return fechai;
+
+    public VBox getHead() {
+        return head;
     }
 
-    public void setFechai(DatePicker fechav) {
-        this.fechai = fechav;
+    public DatePicker getFechai() {
+        return fechai;
     }
 
     public DatePicker getFechaf() {
         return fechaf;
     }
 
-    public void setFechaf(DatePicker fechac) {
-        this.fechaf = fechac;
-    }
     public TableView getTventas() {
         return tventas;
     }
 
-    public void setTventas(TableView tventas) {
-        this.tventas = tventas;
+    public Label getGtvalue() {
+        return gtvalue;
+    }
+
+    public Label getCtvalue() {
+        return ctvalue;
+    }
+
+    public Label getBgvalue() {
+        return bgvalue;
+    }
+
+    public Label getIvaT() {
+        return ivaT;
     }
 
     public Button getConsultar() {
         return Consultar;
     }
 
-    public void setConsultar(Button Consultar) {
-        this.Consultar = Consultar;
+    public TableColumn getFechat() {
+        return fechat;
     }
-    
-    
-    
+
+    public TableColumn getCostos() {
+        return costos;
+    }
+
+    public TableColumn getIvac() {
+        return ivac;
+    }
+
+    public TableColumn getIvaV() {
+        return ivaV;
+    }
+
+    public TableColumn getGanancias() {
+        return ganancias;
+    }
     
 }

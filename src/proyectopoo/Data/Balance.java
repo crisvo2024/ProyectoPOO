@@ -17,16 +17,50 @@ public class Balance {
     private Date fechaCorte;
     private double ganancias;
     private double costos;
-    private ArrayList<Registro>operaciones;
+    private double IVA;
+    private ArrayList<Registro>registros;
 
-    public Balance(Date fechaInicio, Date fechaCorte, ArrayList<Registro> operaciones) {
+    public Balance(Date fechaInicio, Date fechaCorte, ArrayList<Registro> registros) {
         this.fechaInicio = fechaInicio;
         this.fechaCorte = fechaCorte;
         this.ganancias = 0;
         this.costos = 0;
-        this.operaciones = operaciones;        
+        this.IVA=0;
+        this.registros =registros;
+        for(Registro r:registros){
+            this.costos+=r.getCosto();
+            this.ganancias+=r.getGanancias();
+            this.IVA+=r.getIvaV();
+            this.IVA-=r.getIvaC();
+        }
+    }
+    
+
+    public Date getFechaInicio() {
+        return fechaInicio;
     }
 
+    public Date getFechaCorte() {
+        return fechaCorte;
+    }
+
+    public double getGanancias() {
+        return ganancias;
+    }
+
+    public double getCostos() {
+        return costos;
+    }
+
+    public ArrayList<Registro> getRegistros() {
+        return registros;
+    }
+
+    public double getIVA() {
+        return IVA;
+    }
+    
+    
     
     
 }

@@ -16,6 +16,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Tab;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
+import proyectopoo.Data.Balance;
 import proyectopoo.Data.Detalle;
 import proyectopoo.Data.Factura;
 import proyectopoo.Data.Operaciones;
@@ -36,9 +37,18 @@ public class ControlBalance {
         this.balance = new VBalance();
         Singleton s=Singleton.getSingleton();
         this.modelo = s.getModelo();
+        this.balance.getCostos().setCellValueFactory(new PropertyValueFactory("costo"));
+        this.balance.getFechat().setCellValueFactory(new PropertyValueFactory("fecha"));
+        this.balance.getGanancias().setCellValueFactory(new PropertyValueFactory("Ganancias"));
+        this.balance.getIvaV().setCellValueFactory(new PropertyValueFactory("ivaV"));
+        this.balance.getIvac().setCellValueFactory(new PropertyValueFactory("ivaC"));        
         
+        this.balance.getTventas().setItems(registros);
         
+        this.balance.getFechaf().setOnAction(new cambio());
+        this.balance.getFechai().setOnAction(new cambio());
         this.balance.getRoot().setOnSelectionChanged(new selected());
+        
     }
     class selected implements EventHandler<Event>{
 
@@ -53,11 +63,13 @@ public class ControlBalance {
         @Override
         public void handle(ActionEvent event) {
             if(balance.getFechai().getValue()!=null&&balance.getFechaf().getValue()!=null){
-//                ArrayList<Operaciones> o=modelo.getKardex(((Producto)kardex.getSelecproducto().getValue()).getId(), Date.from(kardex.getIni().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(kardex.getFin().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-//                operaciones=FXCollections.observableArrayList(o);
-//                kardex.getTable().setItems(operaciones);
-//                kardex.getTotalExist().setText(String.valueOf(o.get(o.size()-1).getExistencias()));
-//                kardex.getValuexist().setText(String.valueOf(o.get(o.size()-1).getValorE()));
+                Balance b=modelo.getBalance( Date.from(balance.getFechai().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(balance.getFechaf().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                registros=FXCollections.observableArrayList(b.getRegistros());
+                balance.getTventas().setItems(registros);
+                balance.getBgvalue().setText("$"+(b.getGanancias()-b.getCostos()-b.getIVA()));
+                balance.getGtvalue().setText("$"+b.getGanancias());
+                balance.getIvaT().setText("$"+b.getIVA());
+                balance.getCtvalue().setText("$"+b.getCostos());
                 
             }
         }
