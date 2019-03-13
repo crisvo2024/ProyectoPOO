@@ -17,6 +17,8 @@ public class Registro {
     private double valorExistencias;
     private double Ganancias;
     private double costo;
+    private double ivaC;
+    private double ivaV;
 
     public Registro(Date fecha, HashMap<Integer, Double[]> datos, double valorExistencias) {
         this.fecha = fecha;
@@ -28,6 +30,8 @@ public class Registro {
         this.valorExistencias = valorExistencias;
         this.Ganancias = 0;
         this.costo=0;
+        this.ivaC=0;
+        this.ivaV=0;
     }
 
     public Registro() {

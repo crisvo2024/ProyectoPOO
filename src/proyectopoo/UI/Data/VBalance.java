@@ -27,7 +27,6 @@ public class VBalance {
     private DatePicker fechai;
     private DatePicker fechaf;
     private TableView tventas;
-    private TableView tcompras;
     private Label gtvalue;
     private Label ctvalue;
     private Label bgvalue;
@@ -37,11 +36,6 @@ public class VBalance {
     private TableColumn cantidadt; 
     private TableColumn ivat;
     private TableColumn ingresot;
-    private TableColumn fechac;
-    private TableColumn productoc;
-    private TableColumn cantidadc; 
-    private TableColumn ivac;
-    private TableColumn costoc;
 
 
     
@@ -53,7 +47,6 @@ public class VBalance {
         this.fechai = new DatePicker();
         this.fechaf = new DatePicker();;
         this.tventas = new TableView();
-        this.tcompras = new TableView();
         Label Gtotales = new Label("Ganancias Totales");
         Label Ctotales = new Label("Costol Totales");
         Label BGeneral = new Label("Balance General");
@@ -82,8 +75,7 @@ public class VBalance {
         head.getChildren().add(l1);
         
         
-        Label Compras = new Label("Compras");
-        Compras.setMinSize(30, 40);
+        
         
         Label Ventas = new Label("Ventas");
         Ventas.setMinSize(30, 40);
@@ -103,15 +95,6 @@ public class VBalance {
         this.ivat=new TableColumn("IVA:");
         this.ingresot=new TableColumn("Ganancias:");
         this.tventas.getColumns().addAll(fechat,productot,cantidadt,ivat,ingresot);
-        
-        head.getChildren().add(Compras);
-        head.getChildren().add(tcompras);
-        this.fechac=new TableColumn("Fecha:");
-        this.productoc=new TableColumn("Producto:");
-        this.cantidadc=new TableColumn("Cantidad:");
-        this.ivac=new TableColumn("IVA:");
-        this.costoc=new TableColumn("Costo:");
-        this.tcompras.getColumns().addAll(fechac,productoc,cantidadc,ivac,costoc);
         
         l6.add(Gtotales,1,0);
         l6.add(gtvalue,2,0);
@@ -155,26 +138,6 @@ public class VBalance {
     public TableColumn getIngresot() {
         return ingresot;
     }
-
-    public TableColumn getFechac() {
-        return fechac;
-    }
-
-    public TableColumn getProductoc() {
-        return productoc;
-    }
-
-    public TableColumn getCantidadc() {
-        return cantidadc;
-    }
-
-    public TableColumn getIvac() {
-        return ivac;
-    }
-
-    public TableColumn getCostoc() {
-        return costoc;
-    }
     
     public Tab getRoot() {
         return root;
@@ -200,23 +163,12 @@ public class VBalance {
     public void setFechaf(DatePicker fechac) {
         this.fechaf = fechac;
     }
-
-    
-    
     public TableView getTventas() {
         return tventas;
     }
 
     public void setTventas(TableView tventas) {
         this.tventas = tventas;
-    }
-
-    public TableView getTcompras() {
-        return tcompras;
-    }
-
-    public void setTcompras(TableView tcompras) {
-        this.tcompras = tcompras;
     }
 
     public Button getConsultar() {
