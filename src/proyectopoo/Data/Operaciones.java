@@ -57,11 +57,14 @@ public class Operaciones {
         return s.format(fecha);
     }
     public String getDetalles(){
-        String r="Facturas de venta: ";
+        String r="FV: ";
         for(Integer i:facturasV){
-            r+=i+",";
+            r+=i;
+            if(!Objects.equals(i, facturasV.get(facturasV.size()-1))){
+                r+=",";
+            }
         }
-        r+="\nFacturas de compra: ";
+        r+="\nFC: ";
         for(Integer i:facturasC){
             r+=i;
             if(!Objects.equals(i, facturasC.get(facturasC.size()-1))){

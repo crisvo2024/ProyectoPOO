@@ -30,7 +30,7 @@ public class ProyectoPOO extends Application {
         TabPane root=new TabPane();
         root.getTabs().add(new ControlVenta().getVenta());
         root.getTabs().add(new ControlCompra().getCompra());
-        root.getTabs().add(new Modificar().getRoot());
+        root.getTabs().add(new ControlModificar().getModificar());
         root.getTabs().add(new ControlConsulta().getConsulta());
         root.getTabs().add(new VBalance().getRoot());
         root.getTabs().add(new ControlKardex().getKardex());
