@@ -34,6 +34,17 @@ public class Registro {
         this.ivaV=0;
     }
 
+    public Registro(Date fecha, HashMap<Integer, Operaciones> productos, double valorExistencias, double Ganancias, double costo, double ivaC, double ivaV) {
+        this.fecha = fecha;
+        this.productos = productos;
+        this.valorExistencias = valorExistencias;
+        this.Ganancias = Ganancias;
+        this.costo = costo;
+        this.ivaC = ivaC;
+        this.ivaV = ivaV;
+    }
+    
+
     public Registro() {
         this.fecha = new Date();
         this.productos = new HashMap<>();
