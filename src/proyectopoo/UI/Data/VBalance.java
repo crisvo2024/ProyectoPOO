@@ -52,8 +52,8 @@ public class VBalance {
         Label Ctotales = new Label("Costol Totales");
         Label BGeneral = new Label("Balance General");
         Label IvaP=new Label("Iva a pagar:");
-        Label Finicio = new Label("Fecha de Inicio:");
-        Label Ffinal = new Label("Fecha final:");
+        Label Finicio = new Label("Despues de:");
+        Label Ffinal = new Label("Antes de:");
         this.Consultar = new Button("Consultar");
         this.gtvalue = new Label("$*****");
         this.ctvalue = new Label("$*****");

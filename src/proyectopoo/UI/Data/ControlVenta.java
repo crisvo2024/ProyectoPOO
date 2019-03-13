@@ -154,6 +154,17 @@ public class ControlVenta {
                 a.show();
                 return;
             }
+            ArrayList<Integer>prod=new ArrayList<>();
+            for(Detalle d:detalles){
+                prod.add(d.getIdP());
+            }
+            if(prod.contains(p.getId())){
+                Alert a=new Alert(Alert.AlertType.ERROR);
+                a.setContentText("Solo puede añadir una vez el producto, para editarlo seleccionelo en la tabla y oprima quitar");
+                a.getDialogPane().getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
+                a.show();
+                return;
+            }
             if(p.getUnidades()>=Integer.parseInt(venta.getCantidad().getText())){
                 detalles.add(new Detalle(p.getId(), p.getNombre(), Double.parseDouble(venta.getPrecio().getText()),Integer.parseInt(venta.getCantidad().getText()),p.getIva()));
                 venta.getTable().setItems(detalles);
@@ -178,8 +189,7 @@ public class ControlVenta {
         @Override
         public void changed(ObservableValue<? extends Producto> observable, Producto oldValue, Producto newValue) {
              if(newValue!=null){
-                 System.out.println(modelo.getInventario().getProductos().get(newValue.getId()).getUnidades());
-                 venta.getPrecio().setText(String.valueOf(newValue.getPrecioUnidad()));
+                venta.getPrecio().setText(String.valueOf(newValue.getPrecioUnidad()));
              }
         } 
     }

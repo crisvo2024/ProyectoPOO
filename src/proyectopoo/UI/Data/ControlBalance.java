@@ -42,7 +42,7 @@ public class ControlBalance {
         this.balance.getGanancias().setCellValueFactory(new PropertyValueFactory("Ganancias"));
         this.balance.getIvaV().setCellValueFactory(new PropertyValueFactory("ivaV"));
         this.balance.getIvac().setCellValueFactory(new PropertyValueFactory("ivaC"));        
-        
+        registros=FXCollections.observableArrayList();
         this.balance.getTventas().setItems(registros);
         
         this.balance.getFechaf().setOnAction(new cambio());
@@ -54,6 +54,9 @@ public class ControlBalance {
 
         @Override
         public void handle(Event event) {
+            balance.getTventas().getItems().clear();
+            balance.getFechaf().setValue(null);
+            balance.getFechai().setValue(null);
             
         }
         
@@ -64,6 +67,7 @@ public class ControlBalance {
         public void handle(ActionEvent event) {
             if(balance.getFechai().getValue()!=null&&balance.getFechaf().getValue()!=null){
                 Balance b=modelo.getBalance( Date.from(balance.getFechai().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(balance.getFechaf().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                
                 registros=FXCollections.observableArrayList(b.getRegistros());
                 balance.getTventas().setItems(registros);
                 balance.getBgvalue().setText("$"+(b.getGanancias()-b.getCostos()-b.getIVA()));

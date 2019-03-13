@@ -54,8 +54,8 @@ public class Kardex {
         
         head.add(new Label("Producto:"), 0, 0,1,2);
         head.add(this.selecproducto, 1,0,2,2);
-        head.add(new Label("Fecha de inicio:"), 5, 0,7,1);
-        head.add(new Label("Fecha final:"), 5, 1,7,1);
+        head.add(new Label("Despues de:"), 5, 0,7,1);
+        head.add(new Label("Antes de:"), 5, 1,7,1);
         head.add(this.ini, 8, 0);
         head.add(this.fin, 8, 1);
         head.add(table, 0, 2,12,5);

@@ -5,6 +5,7 @@
  */
 package proyectopoo.UI.Data;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -29,11 +30,15 @@ import proyectopoo.Data.Tienda;
  *
  * @author SANTIAGO
  */
-public class ProyectoPOO extends Application {
+public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) {
         Singleton singleton=Singleton.getSingleton();
+        File f=new File("Archivos");
+        if(!f.exists()){
+            f.mkdir();
+        }
         GestionArchivos p= new GestionArchivos();
         Tienda t=new Tienda();
         try {
@@ -41,9 +46,9 @@ public class ProyectoPOO extends Application {
             t.setFacturasC(p.LeerFactura("Archivos/FacturasC.txt"));
             t.setInventario(p.LeerRegistro());
         } catch (IOException ex) {
-            Logger.getLogger(ProyectoPOO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            Logger.getLogger(ProyectoPOO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         Calendar c=Calendar.getInstance();
         Calendar actual= Calendar.getInstance();
@@ -72,7 +77,7 @@ public class ProyectoPOO extends Application {
                 p.GuardarFactura(singleton.getModelo().getFacturasC(), "Archivos/FacturasC.txt");
                 p.GuardarRegistro(singleton.getModelo().getInventario());
             } catch (IOException ex) {
-                Logger.getLogger(ProyectoPOO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }

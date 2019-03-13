@@ -69,7 +69,6 @@ public class ControlCompra {
             }
         });        
         this.compra.getProducto().setItems(productos);
-        this.compra.getProducto().valueProperty().addListener(new combo());
         this.compra.getProd().setCellValueFactory(new PropertyValueFactory("nombreP"));
         this.compra.getCant().setCellValueFactory(new PropertyValueFactory("cantidad"));
         this.compra.getPrecioU().setCellValueFactory(new PropertyValueFactory("precioV"));
@@ -215,14 +214,6 @@ public class ControlCompra {
             }
             compra.getTotal().setText("Total Iva: $"+totaliva+"\nTotal: $"+total);            
         }        
-    }
-    class combo implements ChangeListener<Producto>{
-        @Override
-        public void changed(ObservableValue<? extends Producto> observable, Producto oldValue, Producto newValue) {
-             if(newValue!=null){
-                 System.out.println(modelo.getInventario().getProductos().get(newValue.getId()).getUnidades());
-             }
-        } 
     }
 
     public Tab getCompra(){
