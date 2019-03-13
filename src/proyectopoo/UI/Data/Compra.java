@@ -57,7 +57,7 @@ public class Compra {
         this.head.setRight(numero);
         this.cliente=new TextField();
         this.docCliente=new TextField();
-        HBox cl=new HBox(new Label("Cliente: "));
+        HBox cl=new HBox(new Label("Proveedor: "));
         cl.setSpacing(10);
         cl.setPadding(new Insets(10));
         cl.getChildren().add(this.cliente);

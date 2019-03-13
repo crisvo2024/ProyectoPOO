@@ -87,11 +87,6 @@ public class ControlVenta {
     class quitar implements EventHandler<ActionEvent>{
         @Override
         public void handle(ActionEvent event) {
-            for(Producto p:productos){
-                if(p.getId()==detalles.get(venta.getTable().getSelectionModel().getSelectedIndex()).getIdP()){
-                    p.setUnidades(p.getUnidades()+detalles.get(venta.getTable().getSelectionModel().getSelectedIndex()).getCantidad());
-                }
-            }
             detalles.remove(venta.getTable().getSelectionModel().getSelectedIndex());
             venta.getTable().setItems(detalles);
             venta.getQuitar().setVisible(false);
@@ -161,7 +156,6 @@ public class ControlVenta {
             }
             if(p.getUnidades()>=Integer.parseInt(venta.getCantidad().getText())){
                 detalles.add(new Detalle(p.getId(), p.getNombre(), Double.parseDouble(venta.getPrecio().getText()),Integer.parseInt(venta.getCantidad().getText()),p.getIva()));
-                p.setUnidades(p.getUnidades()-Integer.parseInt(venta.getCantidad().getText()));
                 venta.getTable().setItems(detalles);
                 double total=0;
                 double totaliva=0;

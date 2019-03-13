@@ -79,6 +79,9 @@ public class GestionArchivos {
         SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaop = new Date();
         File archivo = new File("Archivos/Productos.txt");
+        if(!archivo.exists()){
+        archivo.createNewFile();
+        }
         FileInputStream fa = new FileInputStream (archivo); 
         BufferedReader x = new BufferedReader(new InputStreamReader(fa));
         HashMap<Integer,Producto> productos = new HashMap<>();
@@ -98,9 +101,16 @@ public class GestionArchivos {
         }
         Registro act = new Registro();
         File archivo3 = new File("Archivos/RegistroActual.txt");
+        if(!archivo.exists()){
+        archivo3.createNewFile();
+        }
         FileInputStream qq = new FileInputStream (archivo3); 
         BufferedReader tt = new BufferedReader(new InputStreamReader(qq));
-        b = tt.readLine();
+        String g="";
+        if(tt.ready()){
+        g = tt.readLine();
+        }
+        b = g;
         Date fechaopp = new Date();
                 String lectura3[]=b.split(":");
                 Date fechaRegistroo = fecha.parse(lectura3[0]);
@@ -155,6 +165,9 @@ public class GestionArchivos {
         
         HashMap<Date,Registro> registros = new HashMap<>();
         File archivo2 = new File("Archivos/Registros.txt");
+        if(!archivo.exists()){
+        archivo2.createNewFile();
+        }
         FileInputStream pp = new FileInputStream (archivo2); 
         BufferedReader yy = new BufferedReader(new InputStreamReader(pp));
         b = yy.readLine();
@@ -171,7 +184,7 @@ public class GestionArchivos {
                 HashMap <Integer,Operaciones> operaciones= new HashMap<>();
                 while(b.contains("*")){
  //y.write(fecha.format(registro.getFecha())+":"+registro.getValorExistencias()+":"+registro.getGanancias()+":"+registro.getCosto()+":"+registro.getIvaC()+":"+registro.getIvaV()+"\n");
-                        
+                        lectura2 = b.split(":");
                         int key = parseInt(lectura2[1]);
                         fechaop = fecha.parse(lectura2[2]);
                         int Existencias = parseInt(lectura2[3]);
@@ -221,9 +234,7 @@ public class GestionArchivos {
     
     public void GuardarFactura(ArrayList<Factura> factura, String ruta) throws IOException{
         File archivo = new File(ruta);
-        if(!archivo.exists()){
             archivo.createNewFile();
-        }
         FileWriter x= new FileWriter(archivo);
         for(Factura f: factura){
             SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
@@ -241,6 +252,9 @@ public class GestionArchivos {
         ArrayList<Factura> fc = new ArrayList<>();
         ArrayList<Detalle> dt = new ArrayList<>();
         File archivo = new File(ruta);
+        if(!archivo.exists()){
+        archivo.createNewFile();
+        }
         FileInputStream fa = new FileInputStream (archivo); 
         BufferedReader x = new BufferedReader(new InputStreamReader(fa));
         String b="";
