@@ -20,6 +20,7 @@ import proyectopoo.Data.Detalle;
 import proyectopoo.Data.Factura;
 import proyectopoo.Data.Operaciones;
 import proyectopoo.Data.Producto;
+import proyectopoo.Data.Registro;
 import proyectopoo.Data.Tienda;
 
 /**
@@ -29,7 +30,7 @@ import proyectopoo.Data.Tienda;
 public class ControlBalance {
     private VBalance balance;
     private Tienda modelo;
-    private ObservableList<Operaciones>operaciones;
+    private ObservableList<Registro>registros;
 
     public ControlBalance() {
         this.balance = new VBalance();

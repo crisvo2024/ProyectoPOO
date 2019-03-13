@@ -16,6 +16,7 @@ public class Registro {
     private HashMap<Integer, Operaciones>productos;
     private double valorExistencias;
     private double Ganancias;
+    private double costo;
 
     public Registro(Date fecha, HashMap<Integer, Double[]> datos, double valorExistencias) {
         this.fecha = fecha;
@@ -26,6 +27,7 @@ public class Registro {
         }
         this.valorExistencias = valorExistencias;
         this.Ganancias = 0;
+        this.costo=0;
     }
 
     public Registro() {
@@ -43,7 +45,12 @@ public class Registro {
     
     public void compra(int id,int cantidad,double precio, int factura){
         this.valorExistencias+=cantidad*precio;
+        this.costo+=cantidad*precio;
         this.productos.get(id).entrada(cantidad, precio,factura);  
+    }
+
+    public double getCosto() {
+        return costo;
     }
     
     public Date getFecha() {
