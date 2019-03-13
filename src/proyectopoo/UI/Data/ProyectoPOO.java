@@ -67,8 +67,6 @@ public class ProyectoPOO extends Application {
         
         primaryStage.show();
         primaryStage.setOnCloseRequest((observable) -> {
-            System.out.println("hola");
-            
             try {
                 p.GuardarFactura(singleton.getModelo().getFacturasV(), "Archivos/FacturasV.txt");
                 p.GuardarFactura(singleton.getModelo().getFacturasC(), "Archivos/FacturasC.txt");
