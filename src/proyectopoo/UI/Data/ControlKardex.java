@@ -6,6 +6,7 @@
 package proyectopoo.UI.Data;
 
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -66,6 +67,13 @@ public class ControlKardex {
         public void handle(Event event) {
             productos.clear();
             productos.addAll(modelo.getInventario().getProductos().values());
+            if(kardex.getIni().getValue()!=null&&kardex.getFin().getValue()!=null&&kardex.getSelecproducto().getValue()!=null){
+                ArrayList<Operaciones> o=modelo.getKardex(((Producto)kardex.getSelecproducto().getValue()).getId(), Date.from(kardex.getIni().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(kardex.getFin().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                operaciones=FXCollections.observableArrayList(o);
+                kardex.getTable().setItems(operaciones);
+                kardex.getTotalExist().setText(String.valueOf(o.get(o.size()-1).getExistencias()));
+                kardex.getValuexist().setText(String.valueOf(o.get(o.size()-1).getValorE()));
+            }
         }
         
     }
@@ -74,9 +82,11 @@ public class ControlKardex {
         @Override
         public void handle(ActionEvent event) {
             if(kardex.getIni().getValue()!=null&&kardex.getFin().getValue()!=null&&kardex.getSelecproducto().getValue()!=null){
-                operaciones=FXCollections.observableArrayList(modelo.getKardex(((Producto)kardex.getSelecproducto().getValue()).getId(), Date.from(kardex.getIni().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(kardex.getFin().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())));
+                ArrayList<Operaciones> o=modelo.getKardex(((Producto)kardex.getSelecproducto().getValue()).getId(), Date.from(kardex.getIni().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(kardex.getFin().getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                operaciones=FXCollections.observableArrayList(o);
                 kardex.getTable().setItems(operaciones);
-                
+                kardex.getTotalExist().setText(String.valueOf(o.get(o.size()-1).getExistencias()));
+                kardex.getValuexist().setText(String.valueOf(o.get(o.size()-1).getValorE()));
             }
         }
         
