@@ -45,6 +45,7 @@ public class Compra {
     private Button anadir;
     private Button contabilizar;
     private Button anadirP;
+    private Button quitar;
     private Label total;
     
 
@@ -52,7 +53,7 @@ public class Compra {
         this.numero=new Label("Factura: 1234");        
         this.head=new BorderPane();
         this.head.setPadding(new Insets(5));
-        this.head.setLeft(new Label("Cuenta"));
+        this.head.setBottom(new Label("Cuenta"));
         this.head.setRight(numero);
         this.cliente=new TextField();
         this.docCliente=new TextField();
@@ -62,7 +63,7 @@ public class Compra {
         cl.getChildren().add(this.cliente);
         cl.getChildren().add(new Label("Documento: "));
         cl.getChildren().add(this.docCliente);
-        head.setBottom(cl);
+        head.setLeft(cl);
         this.tab=new VBox(head);
         
         this.cant=new TableColumn("Cantidad");
@@ -105,7 +106,10 @@ public class Compra {
         hb.setLeft(gp);
         hb.setBottom(this.contabilizar);
         BorderPane.setAlignment(this.contabilizar, Pos.BOTTOM_RIGHT);
-        
+        this.quitar=new Button("Quitar");
+        this.quitar.setVisible(false);
+        this.tab.alignmentProperty().set(Pos.CENTER_RIGHT);
+        this.tab.getChildren().add(quitar);
         this.tab.getChildren().add(hb);
         
         
@@ -119,6 +123,10 @@ public class Compra {
         return root;
     }
 
+    public Button getQuitar() {
+        return quitar;
+    }
+    
     public VBox getTab() {
         return tab;
     }

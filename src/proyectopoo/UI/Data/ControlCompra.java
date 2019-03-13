@@ -87,7 +87,16 @@ public class ControlCompra {
             c ->Pattern.matches("\\d*", c.getText())? c : null));
         this.compra.getDocCliente().setText("");
         this.compra.getContabilizar().setOnAction(new contabilizar());
+        this.compra.getTable().getSelectionModel().selectedItemProperty().addListener(new tableSelect());
         this.compra.getRoot().setOnSelectionChanged(new selected());
+        this.compra.getQuitar().setOnAction(new quitar());
+    }
+    class tableSelect implements ChangeListener<Detalle>{
+        @Override
+        public void changed(ObservableValue<? extends Detalle> observable, Detalle oldValue, Detalle newValue) {
+            compra.getQuitar().setVisible(true);
+        }
+        
     }
     class selected implements EventHandler<Event>{
 
@@ -139,6 +148,15 @@ public class ControlCompra {
                 productos.clear();
                 productos.addAll(modelo.getInventario().getProductos().values());
             }
+        }
+        
+    }
+    class quitar implements EventHandler<ActionEvent>{
+        @Override
+        public void handle(ActionEvent event) {
+            detalles.remove(compra.getTable().getSelectionModel().getSelectedIndex());
+            compra.getTable().setItems(detalles);
+            compra.getQuitar().setVisible(false);
         }
         
     }

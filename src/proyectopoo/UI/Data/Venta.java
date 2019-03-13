@@ -41,6 +41,7 @@ public class Venta {
     private TextField precio;
     private Button anadir;
     private Button contabilizar;
+    private Button quitar;
     private Label total;
     
 
@@ -48,7 +49,7 @@ public class Venta {
         this.numero=new Label("Factura: 1234");        
         BorderPane head=new BorderPane();
         head.setPadding(new Insets(5));
-        head.setLeft(new Label("Cuenta"));
+        head.setBottom(new Label("Cuenta"));
         head.setRight(numero);
         this.cliente=new TextField();
         this.docCliente=new TextField();
@@ -58,7 +59,7 @@ public class Venta {
         cl.getChildren().add(this.cliente);
         cl.getChildren().add(new Label("Documento: "));
         cl.getChildren().add(this.docCliente);
-        head.setBottom(cl);
+        head.setLeft(cl);
         
         
         VBox tab=new VBox(head);
@@ -98,6 +99,10 @@ public class Venta {
         BorderPane.setMargin(this.total, new Insets(10, 0, 10, 0));
         hb.setBottom(this.contabilizar);
         BorderPane.setAlignment(this.contabilizar, Pos.BOTTOM_RIGHT);
+        this.quitar=new Button("Quitar");
+        this.quitar.setVisible(false);
+        tab.alignmentProperty().set(Pos.CENTER_RIGHT);
+        tab.getChildren().add(quitar);
         tab.getChildren().add(hb);
         
         
@@ -110,6 +115,10 @@ public class Venta {
 
     public Tab getRoot() {
         return root;
+    }
+
+    public Button getQuitar() {
+        return quitar;
     }
 
     public TextField getCliente() {

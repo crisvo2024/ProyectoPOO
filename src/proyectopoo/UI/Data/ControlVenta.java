@@ -80,7 +80,30 @@ public class ControlVenta {
         this.venta.getDocCliente().setText("");
         this.venta.getNumero().setText("Factura: "+this.modelo.getFacturasV().size());
         this.venta.getContabilizar().setOnAction(new contabilizar());
+        this.venta.getTable().getSelectionModel().selectedItemProperty().addListener(new tableSelect());
         this.venta.getRoot().setOnSelectionChanged(new selected());
+        this.venta.getQuitar().setOnAction(new quitar());
+    }
+    class quitar implements EventHandler<ActionEvent>{
+        @Override
+        public void handle(ActionEvent event) {
+            for(Producto p:productos){
+                if(p.getId()==detalles.get(venta.getTable().getSelectionModel().getSelectedIndex()).getIdP()){
+                    p.setUnidades(p.getUnidades()+detalles.get(venta.getTable().getSelectionModel().getSelectedIndex()).getCantidad());
+                }
+            }
+            detalles.remove(venta.getTable().getSelectionModel().getSelectedIndex());
+            venta.getTable().setItems(detalles);
+            venta.getQuitar().setVisible(false);
+        }
+        
+    }
+    class tableSelect implements ChangeListener<Detalle>{
+        @Override
+        public void changed(ObservableValue<? extends Detalle> observable, Detalle oldValue, Detalle newValue) {
+            venta.getQuitar().setVisible(true);
+        }
+        
     }
     class selected implements EventHandler<Event>{
 
