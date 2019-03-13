@@ -37,6 +37,8 @@ public class Compra {
     private TableColumn tot;
     private TableColumn prod;  
     private Label numero;
+    private TextField cliente;
+    private TextField docCliente;
     private ComboBox producto;
     private TextField cantidad;
     private TextField precio;
@@ -52,6 +54,15 @@ public class Compra {
         this.head.setPadding(new Insets(5));
         this.head.setLeft(new Label("Cuenta"));
         this.head.setRight(numero);
+        this.cliente=new TextField();
+        this.docCliente=new TextField();
+        HBox cl=new HBox(new Label("Cliente: "));
+        cl.setSpacing(10);
+        cl.setPadding(new Insets(10));
+        cl.getChildren().add(this.cliente);
+        cl.getChildren().add(new Label("Documento: "));
+        cl.getChildren().add(this.docCliente);
+        head.setBottom(cl);
         this.tab=new VBox(head);
         
         this.cant=new TableColumn("Cantidad");
@@ -108,6 +119,18 @@ public class Compra {
         return root;
     }
 
+    public VBox getTab() {
+        return tab;
+    }
+
+    public TextField getCliente() {
+        return cliente;
+    }
+
+    public TextField getDocCliente() {
+        return docCliente;
+    }
+    
     public BorderPane getHead() {
         return head;
     }
