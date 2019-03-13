@@ -35,7 +35,7 @@ public class ProyectoPOO extends Application {
         root.getTabs().add(new VBalance().getRoot());
         root.getTabs().add(new ControlKardex().getKardex());
         
-        Scene value =new Scene(root, 600, 500);
+        Scene value =new Scene(root, 800, 500);
         value.getStylesheets().add(this.getClass().getResource("project.css").toExternalForm());
         primaryStage.setScene(value);
         primaryStage.show();

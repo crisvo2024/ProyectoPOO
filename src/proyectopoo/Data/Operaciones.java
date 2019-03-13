@@ -41,7 +41,7 @@ public class Operaciones {
         this.facturasV.add(factura);
     }
     public void entrada(int cantidad,double precio, int factura){
-        this.precioCompra=((this.precioCompra*existencias)+(cantidad*precio))/cantidad+existencias; 
+        this.precioCompra=((this.precioCompra*existencias)+(cantidad*precio))/(cantidad+existencias); 
         this.entradas+=cantidad;
         this.existencias+=cantidad;
         this.facturasC.add(factura);
