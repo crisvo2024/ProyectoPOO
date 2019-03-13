@@ -5,6 +5,7 @@
  */
 package proyectopoo.Data;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -51,7 +52,10 @@ public class Registro {
         this.valorExistencias=0;
         this.Ganancias = 0;
     }
-
+    public String getFechaK(){
+        SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(fecha);
+    }
     public double getIvaC() {
         return ivaC;
     }

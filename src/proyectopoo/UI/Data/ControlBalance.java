@@ -38,7 +38,7 @@ public class ControlBalance {
         Singleton s=Singleton.getSingleton();
         this.modelo = s.getModelo();
         this.balance.getCostos().setCellValueFactory(new PropertyValueFactory("costo"));
-        this.balance.getFechat().setCellValueFactory(new PropertyValueFactory("fecha"));
+        this.balance.getFechat().setCellValueFactory(new PropertyValueFactory("fechaK"));
         this.balance.getGanancias().setCellValueFactory(new PropertyValueFactory("Ganancias"));
         this.balance.getIvaV().setCellValueFactory(new PropertyValueFactory("ivaV"));
         this.balance.getIvac().setCellValueFactory(new PropertyValueFactory("ivaC"));        
@@ -70,7 +70,6 @@ public class ControlBalance {
                 balance.getGtvalue().setText("$"+b.getGanancias());
                 balance.getIvaT().setText("$"+b.getIVA());
                 balance.getCtvalue().setText("$"+b.getCostos());
-                
             }
         }
         
