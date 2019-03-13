@@ -41,13 +41,11 @@ public class GestionArchivos {
         
         for(Registro registro: inventario.getRegistros().values()){
             SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
-          //this.valorExistencias = valorExistencias;
-        //this.Ganancias = Ganancias;
-        //this.costo = costo;
-        //this.ivaC = ivaC;
-        //this.ivaV = ivaV;
-            y.write(fecha.format(registro.getFecha())+":"+registro.getValorExistencias()+":"+registro.getGanancias()+":"+registro.getCosto()+":"+registro.getIvaC+":"+registro.getIvaV+"\n);
-            
+          
+            y.write(fecha.format(registro.getFecha())+":"+registro.getValorExistencias()+":"+registro.getGanancias()+":"+registro.getCosto()+":"+registro.getIvaC()+":"+registro.getIvaV()+"\n");
+            for (Map.Entry<Integer, Producto> entry : inventario.getProductos().entrySet()) {
+                System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
+            }
             
             
         }
